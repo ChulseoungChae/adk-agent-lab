@@ -1,0 +1,55 @@
+{
+  "chapters": [
+    {
+      "number": 1,
+      "summary": "The necessity of AI in semiconductor manufacturing and the paradigm shift from reactive to proactive monitoring.",
+      "title": "Introduction: The Shift to AI-Integrated Semiconductor Fabs"
+    },
+    {
+      "number": 2,
+      "summary": "Architecture of the AI Assistant Platform, focusing on data ingestion, real-sing, and the role of the AI engine.",
+      "title": "Platform Overview: Real-time Monitoring and Data Integration"
+    },
+    {
+      "number": 3,
+      "summary": "Deep dive into real-time anomaly detection using thresholding and sudden parameter changes (e.g., MFC8_NH3).",
+      "title": "Real-time Anomaly Detection: Immediate Detection of MFC Fluctuations"
+    },
+    {
+      "number": 4,
+      "summary": "Predictive maintenance using PatchTST models to forecast parameter deviations before they hit limits.",
+      "title": "Predictive Analytics: Forecasting Process Deviations with PatchTST"
+    },
+    {
+      "number": 5,
+      "summary": "Analyzing PJOB history and recipe execution patterns to ensure process stability.",
+      "title": "Process Traceability: Analyzing Historical Recipe Execution (PJOB)"
+    },
+    {
+      "number": 6,
+      "summary": "Leveraging RAG (Retrieval-Augmented Generation) to query process manuals and troubleshooting guides.",
+      "title": "Knowledge Management: RAG-based Troubleshooting and Documentation"
+    },
+    {
+      "number": 7,
+      "summary": "Automated reporting systems for daily/monthly statistical analysis of process health.",
+      "title": "Statistical Insights: Automated Monthly/Daily Performance Reporting"
+    },
+    {
+      "number": 8,
+      "summary": "A technical case study combining anomaly logs and prediction logs to diagnose an NH3 flow rate issue.",
+      "title": "Deep Dive: Analyzing an NH3 Flow Rate Anomaly Case"
+    },
+    {
+      "number": 9,
+      "summary": "Deployment strategies, data integrity, and overcoming challenges in a production environment.",
+      "title": "Implementation Challenges and Best Practices"
+    },
+    {
+      "number": 10,
+      "summary": "The road to autonomous manufacturing and the future of AI in ALD/PVD processes.",
+      "title": "Future Trends: Autonomous Process Control"
+    }
+  ],
+  "updated_at": "2026-06-15T01:41:04.278335"
+}
