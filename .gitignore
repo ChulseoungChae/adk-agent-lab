@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+output/*.md
+output/*.json
+!output/.gitkeep
+.adk/
+*.egg-info/
+dist/
+build/
