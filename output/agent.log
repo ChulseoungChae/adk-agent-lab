@@ -76,3 +76,11 @@
 2026-06-15 01:46:13,970 | INFO | TOOL START | read_book_state()
 2026-06-15 01:46:13,971 | INFO | TOOL OK   | read_book_state -> {'metadata': {'title': 'AI-Driven Semiconductor Process Monitoring', 'subtitle': 'AI 기반 ALD/PVD 공정 모니터링 및 이상 감지 실무 가이드', 'audience': '반도체 공정 엔지니어 및 제조 데이터 사이언티스트', 'theme': '반도체 AI 어시스턴트 플랫폼의 실시간 이...
 2026-06-15 01:46:39,451 | INFO | SESSION END
+2026-06-15 01:46:39,466 | INFO | SYNC OK   | commit: Update session log
+2026-06-15 01:46:41,846 | INFO | PUSH OK   | origin/main
+2026-06-15 02:08:46 | INFO | 테스트 로그
+2026-06-15 02:09:59 | INFO | SESSION START | mode=auto | log=/data1/github_cschae/adk-agent-lab/output/agent.log
+2026-06-15 02:09:59 | INFO | PROMPT | http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
+(실시간 이상감지, 과거 공정 이력, 공정 결과 추론, 문서/RAG, 리포트)을
+반도체 공정 엔지니어 대상 **한국어*...
+2026-06-15 02:10:53 | INFO | TOOL START | save_book_metadata(audience='반도체 ALD/PVD 공정 및 설비 엔지니어', subtitle='실시간 이상감지부터 예측 모델링까지, 데이터 기반의 스마트 팹 구축 전략', theme='AI 플랫폼의 핵심 기능을 활용한 공정 최적화 및 수율 향상 전략', title='AI 기반 반도체 공정 관리의 혁신: ALD/PVD 엔지니어를 위한 AI 어시스턴트 활용 가이드')
