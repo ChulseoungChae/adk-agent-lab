@@ -1,0 +1,17 @@
+2026-06-16 18:53:05 | INFO | 
+2026-06-16 18:53:05 | INFO | ================================================================================
+2026-06-16 18:53:05 | INFO | SESSION START | 2026-06-16 18:53:05 | mode=compare_batch | models=gemma4:31b,gemma4:26b,qwen3.6:35b,qwen3-vl:32b | log=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/agent.log
+2026-06-16 18:53:05 | INFO | ================================================================================
+2026-06-16 18:53:05 | INFO | COMPARE | start model 1/4: gemma4:31b
+2026-06-16 18:53:05 | INFO | 
+2026-06-16 18:53:05 | INFO | ================================================================================
+2026-06-16 18:53:05 | INFO | SESSION START | 2026-06-16 18:53:05 | mode=compare | model=gemma4:31b | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_31b | log=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/agent.log | progress=1/4
+2026-06-16 18:53:05 | INFO | ================================================================================
+2026-06-16 18:53:05 | INFO | PROMPT | http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
+(실시간 이상감지, 과거 공정 이력, 공정 결과 추론, 문서/RAG, 리포트)을
+반도체 공정 엔지니어 대상 **한국어*...
+2026-06-16 18:53:07 | ERROR | RUN FAIL | model=gemma4:31b | code=1
+2026-06-16 18:53:07 | INFO | --------------------------------------------------------------------------------
+2026-06-16 18:53:07 | INFO | SESSION END | 2026-06-16 18:53:07 | model=gemma4:31b | status=failed | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_31b | gpu_util_avg=0.0% | gpu_util_max=0.0% | elapsed=2s
+2026-06-16 18:53:07 | INFO | ================================================================================
+2026-06-16 18:53:07 | INFO | 
