@@ -72,7 +72,10 @@ def _adk_env(model: str) -> dict[str, str]:
     env.setdefault("OLLAMA_API_BASE", "http://localhost:11434")
     env["OLLAMA_MODEL"] = model
     env["BOOK_OUTPUT_SUBDIR"] = slug
-    env["PYTHONPATH"] = str(PROJECT_DIR)
+    # PYTHONPATH에 PROJECT_DIR을 넣으면 ADK가 agent/agent.py를
+    # 패키지가 아닌 단일 모듈로 로드해 relative import가 깨집니다.
+    # ADK가 agents_dir(PROJECT_DIR)를 sys.path에 직접 추가합니다.
+    env.pop("PYTHONPATH", None)
     env["PYTHONIOENCODING"] = "utf-8"
     env.setdefault("LC_ALL", "C.UTF-8")
     env.setdefault("LANG", "C.UTF-8")
