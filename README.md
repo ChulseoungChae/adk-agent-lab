@@ -11,9 +11,10 @@ adk-agent-lab/
 │   ├── agent/          # 실행 코드
 │   ├── output/         # 결과물
 │   └── README.md
-├── 02_다음기능/         # (추가 예정)
-│   ├── agent/
-│   └── output/
+├── 02_model_compare_book/
+│   ├── agent/          # 실행 코드
+│   ├── output/         # 모델별 결과물
+│   └── README.md
 └── requirements.txt
 ```
 
@@ -29,3 +30,4 @@ pip install -r requirements.txt
 | 폴더 | 설명 |
 |------|------|
 | [01_making_a_book](01_making_a_book/) | 반도체 플랫폼 데이터 기반 한국어 기술서 집필 |
+| [02_model_compare_book](02_model_compare_book/) | Ollama 멀티모델 순차 집필·성능 비교 |

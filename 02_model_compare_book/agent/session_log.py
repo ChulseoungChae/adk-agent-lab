@@ -48,7 +48,7 @@ def _get_logger() -> logging.Logger:
         return _logger
 
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    logger = logging.getLogger("book_agent")
+    logger = logging.getLogger("model_compare_book")
     logger.setLevel(logging.INFO)
     logger.propagate = False
 

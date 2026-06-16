@@ -11,7 +11,6 @@
 
 from __future__ import annotations
 
-import atexit
 import importlib
 import os
 import subprocess
@@ -29,11 +28,20 @@ if str(PROJECT_DIR) not in sys.path:
 book_tools = importlib.import_module(f"{AGENT_PKG}.book_tools")
 config = importlib.import_module(f"{AGENT_PKG}.config")
 session_log = importlib.import_module(f"{AGENT_PKG}.session_log")
+gpu_monitor_mod = importlib.import_module(f"{AGENT_PKG}.gpu_monitor")
 
 sync_results = book_tools.sync_results
 AUTO_SYNC_RESULTS = config.AUTO_SYNC_RESULTS
 LOG_PATH = config.LOG_PATH
+OLLAMA_MODEL = config.OLLAMA_MODEL
+GPU_CSV_PATH = config.GPU_CSV_PATH
+GPU_SUMMARY_LOG_PATH = config.GPU_SUMMARY_LOG_PATH
+GPU_MONITOR_ENABLED = config.GPU_MONITOR_ENABLED
+GPU_MONITOR_INTERVAL_SEC = config.GPU_MONITOR_INTERVAL_SEC
+GpuMonitor = gpu_monitor_mod.GpuMonitor
 log_event = session_log.log_event
+log_session_start = session_log.log_session_start
+log_session_end = session_log.log_session_end
 
 AUTO_PROMPT = """
 http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
@@ -60,10 +68,28 @@ def _adk_env() -> dict[str, str]:
     return env
 
 
-def _on_session_end() -> None:
-    log_event("SESSION END")
-    if AUTO_SYNC_RESULTS:
-        sync_results("Update session log")
+def _run_with_gpu_monitor(mode: str, extra_args: list[str] | None = None) -> None:
+    log_session_start(mode=mode, model=OLLAMA_MODEL, log=str(LOG_PATH))
+    monitor = GpuMonitor(
+        model=OLLAMA_MODEL,
+        csv_path=GPU_CSV_PATH,
+        summary_log_path=GPU_SUMMARY_LOG_PATH,
+        interval_sec=GPU_MONITOR_INTERVAL_SEC,
+        enabled=GPU_MONITOR_ENABLED,
+    )
+    monitor.start()
+    try:
+        _run_adk(mode, extra_args)
+    finally:
+        gpu_stats = monitor.stop()
+        end_meta: dict[str, str] = {"model": OLLAMA_MODEL}
+        if gpu_stats and gpu_stats.get("sample_count", 0) > 0:
+            agg = gpu_stats.get("aggregate", {}).get("gpu_util_pct", {})
+            end_meta["gpu_util_avg"] = f"{agg.get('avg', 0)}%"
+            end_meta["gpu_util_max"] = f"{agg.get('max', 0)}%"
+        log_session_end(**end_meta)
+        if AUTO_SYNC_RESULTS:
+            sync_results("Update session log")
 
 
 def _run_adk(mode: str, extra_args: list[str] | None = None) -> None:
@@ -86,23 +112,17 @@ def main() -> None:
         return
 
     if arg in ("auto", ""):
-        log_event(f"SESSION START | mode=auto | log={LOG_PATH}")
-        atexit.register(_on_session_end)
         log_event(f"PROMPT | {AUTO_PROMPT[:120]}...")
-        _run_adk("run", [AUTO_PROMPT])
+        _run_with_gpu_monitor("run", [AUTO_PROMPT])
         return
 
     if arg == "chat":
-        log_event(f"SESSION START | mode=chat | log={LOG_PATH}")
-        atexit.register(_on_session_end)
-        _run_adk("run")
+        _run_with_gpu_monitor("run")
         return
 
     if arg in ("run", "web", "api"):
-        log_event(f"SESSION START | mode={arg} | log={LOG_PATH}")
-        atexit.register(_on_session_end)
         extra = sys.argv[2:] if arg == "run" else None
-        _run_adk(arg, extra)
+        _run_with_gpu_monitor(arg, extra)
         return
 
     print(
