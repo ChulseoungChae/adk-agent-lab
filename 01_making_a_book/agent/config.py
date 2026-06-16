@@ -4,8 +4,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 _AGENT_DIR = Path(__file__).resolve().parent
-_AGENT_ID = _AGENT_DIR.name
-_REPO_ROOT = _AGENT_DIR.parents[1]
+_PROJECT_DIR = _AGENT_DIR.parent
+_REPO_ROOT = _PROJECT_DIR.parent
 
 load_dotenv(_REPO_ROOT / ".env")
 
@@ -22,7 +22,7 @@ PLATFORM_API_BASE = os.getenv(
 RESULTS_REPO = Path(os.getenv("RESULTS_REPO", str(_REPO_ROOT)))
 
 BOOK_OUTPUT_DIR = Path(
-    os.getenv("BOOK_OUTPUT_DIR", str(_REPO_ROOT / "output" / _AGENT_ID))
+    os.getenv("BOOK_OUTPUT_DIR", str(_PROJECT_DIR / "output"))
 )
 BOOK_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -32,7 +32,7 @@ CHAPTERS_DIR = BOOK_OUTPUT_DIR / "chapters"
 CHAPTERS_DIR.mkdir(parents=True, exist_ok=True)
 LOG_PATH = BOOK_OUTPUT_DIR / "agent.log"
 
-AGENT_ID = _AGENT_ID
+PROJECT_ID = _PROJECT_DIR.name
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "30"))
 AUTO_SYNC_RESULTS = os.getenv("AUTO_SYNC_RESULTS", "1") == "1"
 AUTO_PUSH_RESULTS = os.getenv("AUTO_PUSH_RESULTS", "1") == "1"

@@ -1,4 +1,4 @@
-"""세션 로그 — output/{agent_id}/agent.log 에 기록."""
+"""세션 로그 — ../output/agent.log 에 기록."""
 
 from __future__ import annotations
 

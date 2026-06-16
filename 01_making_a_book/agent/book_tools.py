@@ -12,6 +12,7 @@ from typing import Any
 from .config import (
     AUTO_PUSH_RESULTS,
     AUTO_SYNC_RESULTS,
+    BOOK_OUTPUT_DIR,
     CHAPTERS_DIR,
     GIT_REMOTE,
     METADATA_PATH,
@@ -37,6 +38,10 @@ def _current_branch() -> str:
     return result.stdout.strip() or "main"
 
 
+def _git_output_path() -> str:
+    return str(BOOK_OUTPUT_DIR.relative_to(RESULTS_REPO))
+
+
 def sync_results(message: str = "Update book output") -> dict:
     """책 결과물(output/)을 커밋하고 원격 GitHub에 push합니다."""
     if not (RESULTS_REPO / ".git").is_dir():
@@ -44,8 +49,9 @@ def sync_results(message: str = "Update book output") -> dict:
         log_event(f"SYNC SKIP | {result['error']}", level=logging.ERROR)
         return result
 
+    git_output = _git_output_path()
     status = subprocess.run(
-        ["git", "-C", str(RESULTS_REPO), "status", "--porcelain", "output/"],
+        ["git", "-C", str(RESULTS_REPO), "status", "--porcelain", git_output],
         capture_output=True,
         text=True,
         check=False,
@@ -56,7 +62,7 @@ def sync_results(message: str = "Update book output") -> dict:
         return result
 
     subprocess.run(
-        ["git", "-C", str(RESULTS_REPO), "add", "output/"],
+        ["git", "-C", str(RESULTS_REPO), "add", git_output],
         check=True,
     )
     commit = subprocess.run(
