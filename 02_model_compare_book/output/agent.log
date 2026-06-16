@@ -98,3 +98,19 @@
 2026-06-16 19:18:39 | INFO | SESSION END | 2026-06-16 19:18:39 | model=qwen3.6:35b | status=failed | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b | gpu_util_avg=0.0% | gpu_util_max=0.0% | elapsed=6s
 2026-06-16 19:18:39 | INFO | ================================================================================
 2026-06-16 19:18:39 | INFO | 
+2026-06-16 19:18:39 | INFO | SYNC OK   | commit: [qwen3.6:35b] Model compare book output
+2026-06-16 19:18:41 | INFO | PUSH OK   | origin/main
+2026-06-16 19:18:41 | INFO | COMPARE | done model 3/4: qwen3.6:35b | status=failed | elapsed=6.8s
+2026-06-16 19:18:41 | INFO | COMPARE | start model 4/4: qwen3-vl:32b
+2026-06-16 19:18:41 | INFO | 
+2026-06-16 19:18:41 | INFO | ================================================================================
+2026-06-16 19:18:41 | INFO | SESSION START | 2026-06-16 19:18:41 | mode=compare | model=qwen3-vl:32b | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b | log=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/agent.log | progress=4/4
+2026-06-16 19:18:41 | INFO | ================================================================================
+2026-06-16 19:18:41 | INFO | PROMPT | http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
+(실시간 이상감지, 과거 공정 이력, 공정 결과 추론, 문서/RAG, 리포트)을
+반도체 공정 엔지니어 대상 **한국어*...
+2026-06-16 19:18:48 | ERROR | RUN FAIL | model=qwen3-vl:32b | code=1
+2026-06-16 19:18:48 | INFO | --------------------------------------------------------------------------------
+2026-06-16 19:18:48 | INFO | SESSION END | 2026-06-16 19:18:48 | model=qwen3-vl:32b | status=failed | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b | gpu_util_avg=0.0% | gpu_util_max=0.0% | elapsed=6s
+2026-06-16 19:18:48 | INFO | ================================================================================
+2026-06-16 19:18:48 | INFO | 
