@@ -109,3 +109,40 @@ AGGREGATE (all GPUs, all samples)
   power_w: min=16.19 max=28.54 avg=21.36
 ================================================================================
 
+
+================================================================================
+GPU SUMMARY | finished=2026-06-16 19:18:18 | model=gemma4:31b | samples=992 | interval=5.0s
+================================================================================
+GPU 0 (NVIDIA GeForce RTX 4090)
+  gpu_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=4047.0 max=4047.0 avg=4047.0
+  temperature_c: min=23.0 max=24.0 avg=23.92
+  power_w: min=18.12 max=18.92 avg=18.51
+GPU 1 (NVIDIA GeForce RTX 4090)
+  gpu_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=4041.0 max=4041.0 avg=4041.0
+  temperature_c: min=23.0 max=24.0 avg=23.92
+  power_w: min=21.33 max=24.12 avg=22.62
+GPU 2 (NVIDIA GeForce RTX 4090)
+  gpu_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=3557.0 max=3557.0 avg=3557.0
+  temperature_c: min=23.0 max=24.0 avg=23.86
+  power_w: min=14.74 max=17.12 avg=16.07
+GPU 3 (NVIDIA GeForce RTX 4090)
+  gpu_util_pct: min=0.0 max=85.0 avg=8.82
+  mem_util_pct: min=0.0 max=29.0 avg=7.03
+  mem_used_mb: min=6794.0 max=23759.0 avg=23616.1
+  temperature_c: min=23.0 max=39.0 avg=26.45
+  power_w: min=28.58 max=157.76 avg=91.51
+--------------------------------------------------------------------------------
+AGGREGATE (all GPUs, all samples)
+  gpu_util_pct: min=0.0 max=85.0 avg=2.21
+  mem_util_pct: min=0.0 max=29.0 avg=1.76
+  mem_used_mb: min=3557.0 max=23759.0 avg=8815.28
+  temperature_c: min=23.0 max=39.0 avg=24.54
+  power_w: min=14.74 max=157.76 avg=37.18
+================================================================================
+
