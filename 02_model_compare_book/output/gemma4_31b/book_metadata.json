@@ -1,0 +1,9 @@
+{
+  "title": "반도체 공정 지능화: AI 기반 이상 감지 및 최적화 가이드",
+  "subtitle": "AI 어시스턴트 플랫폼을 활용한 데이터 기반 ALD/PVD 공정 관리 실무",
+  "audience": "반도체 공정 엔지니어 및 AI 도입 담당자",
+  "theme": "반도체 AI 어시스턴트 플랫폼의 실시간 이상 감지, 예측 모델, 공정 이력 분석, RAG 기반 지식 관리 및 리포팅 기능을 활용한 공정 최적화 방법론",
+  "updated_at": "2026-06-16T19:01:29.707125",
+  "model": "gemma4:31b",
+  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_31b"
+}
