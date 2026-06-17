@@ -173,3 +173,38 @@ TOTAL (4 GPU 합산, 샘플별)
   total_power_w: min=84.82 max=203.58 avg=137.16
 ================================================================================
 
+
+================================================================================
+GPU SUMMARY | finished=2026-06-17 15:27:24 | model=qwen3.6:35b | samples=35 | interval=5.0s
+================================================================================
+GPU 0 (GPU 0)
+  util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=4047.0 max=4047.0 avg=4047.0
+  temp_c: min=24.0 max=24.0 avg=24.0
+  power_w: min=17.9 max=18.4 avg=18.17
+GPU 1 (GPU 1)
+  util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=4041.0 max=4041.0 avg=4041.0
+  temp_c: min=24.0 max=24.0 avg=24.0
+  power_w: min=21.48 max=23.91 avg=22.68
+GPU 2 (GPU 2)
+  util_pct: min=0.0 max=0.0 avg=0.0
+  mem_util_pct: min=0.0 max=0.0 avg=0.0
+  mem_used_mb: min=3557.0 max=3557.0 avg=3557.0
+  temp_c: min=24.0 max=24.0 avg=24.0
+  power_w: min=15.7 max=17.14 avg=16.46
+GPU 3 (GPU 3)
+  util_pct: min=0.0 max=62.0 avg=12.4
+  mem_util_pct: min=0.0 max=3.0 avg=1.71
+  mem_used_mb: min=6794.0 max=23527.0 avg=22569.17
+  temp_c: min=24.0 max=27.0 avg=26.0
+  power_w: min=28.64 max=101.39 avg=78.46
+--------------------------------------------------------------------------------
+TOTAL (4 GPU 합산, 샘플별)
+  total_gpu_util_pct: min=0.0 max=62.0 avg=12.4
+  total_mem_used_mb: min=18439.0 max=35172.0 avg=34214.17
+  total_power_w: min=85.38 max=158.25 avg=135.77
+================================================================================
+

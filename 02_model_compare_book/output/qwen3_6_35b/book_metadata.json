@@ -5,5 +5,8 @@
   "theme": "반도체 AI 어시스턴트 플랫폼의 기능과 실제 적용 사례를 데이터 기반 기술서로 소개",
   "updated_at": "2026-06-17T15:25:44.313857",
   "model": "qwen3.6:35b",
-  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b"
+  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b",
+  "elapsed_seconds": 177.1,
+  "status": "ok",
+  "finished_at": "2026-06-17T15:27:24.661219"
 }
