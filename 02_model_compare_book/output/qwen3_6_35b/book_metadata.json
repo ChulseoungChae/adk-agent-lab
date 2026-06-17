@@ -6,7 +6,7 @@
   "updated_at": "2026-06-17T15:25:44.313857",
   "model": "qwen3.6:35b",
   "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b",
-  "elapsed_seconds": 177.1,
+  "elapsed_seconds": 885.0,
   "status": "ok",
-  "finished_at": "2026-06-17T15:27:24.661219"
+  "finished_at": "2026-06-17T16:34:15.156700"
 }
