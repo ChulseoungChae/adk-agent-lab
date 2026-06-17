@@ -1,6 +1,6 @@
 # 02_model_compare_book — 실행 결과 요약
 
-자동 생성: 2026-06-17 17:14:24  
+자동 생성: 2026-06-17 20:51:11  
 데이터 출처: `gpu_usage.csv`
 
 ## 모델별 집필 결과
@@ -11,6 +11,24 @@
 | `gemma4:26b` | ok | 5 | 377.9s | `gemma4_26b/` |
 | `qwen3.6:35b` | ok | 0 | 149.8s | `qwen3_6_35b/` |
 | `qwen3-vl:32b` | ok | 7 | 10969.9s | `qwen3_vl_32b/` |
+
+## 성능 비교 그래프
+
+### 집필 소요 시간 (분)
+
+![집필 소요 시간 (분)](charts/compare_elapsed.png)
+
+### 완성 챕터 수
+
+![완성 챕터 수](charts/compare_chapters.png)
+
+### GPU 사용량 평균 (VRAM·util·전력)
+
+![GPU 사용량 평균 (VRAM·util·전력)](charts/compare_gpu_avg.png)
+
+### VRAM 시계열 (4 GPU 합산)
+
+![VRAM 시계열 (4 GPU 합산)](charts/compare_vram_timeseries.png)
 
 ## GPU 사용량 요약
 
@@ -111,6 +129,7 @@
 
 ## 참고
 
+- 그래프 원본: `charts/`
 - 상세 시계열: `gpu_usage.csv`
 - 세션별 텍스트 로그: `gpu_usage_summary.log`, `agent.log`
 - 집필 JSON 요약: `comparison_summary.json`

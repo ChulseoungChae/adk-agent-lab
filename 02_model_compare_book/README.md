@@ -54,12 +54,21 @@ python3 run.py sync         # 수동 commit+push
 
 각 모델 집필이 끝나면 `output/{모델}/`에 결과가 저장되고, `comparison_summary.json`에 소요 시간·챕터 수가 기록됩니다.
 
-**4개 모델 compare 완료 후** `output/README.md`가 자동 생성됩니다 (`gpu_usage.csv` 기반 GPU·VRAM 표).  
+**4개 모델 compare 완료 후** `output/README.md`가 자동 생성됩니다 (`gpu_usage.csv` 기반 GPU·VRAM 표 + **성능 비교 그래프**).  
 이미 CSV가 있으면 수동 재생성:
 
 ```bash
 python3 run.py report
 ```
+
+생성되는 그래프 (`output/charts/`):
+
+| 파일 | 내용 |
+|------|------|
+| `compare_elapsed.png` | 모델별 집필 소요 시간 |
+| `compare_chapters.png` | 완성 챕터 수 |
+| `compare_gpu_avg.png` | VRAM·GPU util·전력 평균 |
+| `compare_vram_timeseries.png` | VRAM 시계열 (4 GPU 합산) |
 
 ## 로그
 

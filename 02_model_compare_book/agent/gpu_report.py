@@ -1,4 +1,4 @@
-"""GPU CSV 기반 output/README.md 리포트 생성."""
+"""GPU CSV 기반 output/README.md 리포트·성능 비교 그래프 생성."""
 
 from __future__ import annotations
 
@@ -10,7 +10,14 @@ import os
 from pathlib import Path
 from typing import Any
 
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
 from .config import COMPARE_MODELS
+
+CHART_COLORS = ["#4C78A8", "#F58518", "#54A24B", "#E45756"]
 
 MAX_GPUS = int(os.getenv("GPU_MONITOR_COUNT", "4"))
 
@@ -98,6 +105,155 @@ def _load_book_results(summary_path: Path) -> list[dict[str, Any]]:
     return models if isinstance(models, list) else []
 
 
+def _short_model_label(model: str) -> str:
+    return model.replace("gemma4:", "g4:").replace("qwen3.6:", "q3.6:").replace("qwen3-vl:", "q3-vl:")
+
+
+def _setup_chart_style() -> None:
+    plt.rcParams.update(
+        {
+            "figure.figsize": (9, 4.5),
+            "figure.dpi": 120,
+            "axes.grid": True,
+            "grid.alpha": 0.3,
+            "font.size": 10,
+        }
+    )
+
+
+def _save_chart(fig: plt.Figure, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.tight_layout()
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
+
+
+def generate_comparison_charts(
+    *,
+    csv_path: Path,
+    charts_dir: Path,
+    models: list[str] | None = None,
+    book_results: list[dict[str, Any]] | None = None,
+    summary_path: Path | None = None,
+) -> list[str]:
+    """성능 비교 PNG를 생성하고 README용 상대 경로 목록을 반환합니다."""
+    models = models or COMPARE_MODELS
+    if book_results is None and summary_path is not None:
+        book_results = _load_book_results(summary_path)
+
+    book_map = _book_results_map(book_results)
+    rows = _load_csv_rows(csv_path)
+    grouped = _group_by_model(rows)
+    model_stats = {model: analyze_model_samples(grouped.get(model, [])) for model in models}
+
+    _setup_chart_style()
+    chart_paths: list[str] = []
+
+    labels = [_short_model_label(model) for model in models]
+    colors = CHART_COLORS[: len(models)]
+
+    elapsed = [
+        float(book_map.get(model, {}).get("elapsed_seconds") or 0) for model in models
+    ]
+    chapters = [
+        int(book_map.get(model, {}).get("chapter_count") or 0) for model in models
+    ]
+    vram_avg = [model_stats[model]["total_mem_used_mb"]["avg"] for model in models]
+    util_avg = [model_stats[model]["total_gpu_util_pct"]["avg"] for model in models]
+    power_avg = [model_stats[model]["total_power_w"]["avg"] for model in models]
+
+    fig, ax = plt.subplots()
+    bars = ax.bar(labels, [value / 60 for value in elapsed], color=colors)
+    ax.set_title("Model Compare — Elapsed Time")
+    ax.set_ylabel("Minutes")
+    ax.bar_label(bars, fmt="%.1f", padding=3)
+    chart_name = "compare_elapsed.png"
+    _save_chart(fig, charts_dir / chart_name)
+    chart_paths.append(f"charts/{chart_name}")
+
+    fig, ax = plt.subplots()
+    bars = ax.bar(labels, chapters, color=colors)
+    ax.set_title("Model Compare — Completed Chapters")
+    ax.set_ylabel("Chapters")
+    ax.bar_label(bars, padding=3)
+    chart_name = "compare_chapters.png"
+    _save_chart(fig, charts_dir / chart_name)
+    chart_paths.append(f"charts/{chart_name}")
+
+    fig, ax = plt.subplots(figsize=(10, 4.5))
+    x_positions = list(range(len(models)))
+    width = 0.25
+    ax.bar(
+        [pos - width for pos in x_positions],
+        vram_avg,
+        width=width,
+        label="VRAM avg (MB)",
+        color="#4C78A8",
+    )
+    ax.bar(
+        x_positions,
+        util_avg,
+        width=width,
+        label="GPU util avg (%)",
+        color="#F58518",
+    )
+    ax.bar(
+        [pos + width for pos in x_positions],
+        power_avg,
+        width=width,
+        label="Power avg (W)",
+        color="#54A24B",
+    )
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(labels)
+    ax.set_title("Model Compare — GPU Usage (Average)")
+    ax.legend(loc="upper right")
+    chart_name = "compare_gpu_avg.png"
+    _save_chart(fig, charts_dir / chart_name)
+    chart_paths.append(f"charts/{chart_name}")
+
+    fig, ax = plt.subplots(figsize=(10, 4.5))
+    for index, model in enumerate(models):
+        model_rows = grouped.get(model, [])
+        if not model_rows:
+            continue
+        times: list[float] = []
+        values: list[float] = []
+        start: datetime | None = None
+        for row in model_rows:
+            raw_ts = row.get("timestamp", "")
+            raw_mem = row.get("total_mem_used_mb", "")
+            if not raw_ts or raw_mem in ("", None):
+                continue
+            try:
+                ts = datetime.strptime(raw_ts, "%Y-%m-%d %H:%M:%S")
+                mem = float(raw_mem)
+            except ValueError:
+                continue
+            if start is None:
+                start = ts
+            times.append((ts - start).total_seconds() / 60.0)
+            values.append(mem)
+        if times:
+            ax.plot(
+                times,
+                values,
+                label=_short_model_label(model),
+                color=colors[index],
+                linewidth=1.2,
+                alpha=0.9,
+            )
+    ax.set_title("VRAM Usage Over Time (4 GPUs Total)")
+    ax.set_xlabel("Elapsed (min)")
+    ax.set_ylabel("VRAM (MB)")
+    ax.legend(loc="upper right", fontsize=8)
+    chart_name = "compare_vram_timeseries.png"
+    _save_chart(fig, charts_dir / chart_name)
+    chart_paths.append(f"charts/{chart_name}")
+
+    return chart_paths
+
+
 def generate_output_readme(
     *,
     csv_path: Path,
@@ -138,9 +294,29 @@ def generate_output_readme(
             elapsed = f"{elapsed}s"
         lines.append(f"| `{model}` | {status} | {chapters} | {elapsed} | `{slug}/` |")
 
+    charts_dir = readme_path.parent / "charts"
+    chart_paths = generate_comparison_charts(
+        csv_path=csv_path,
+        charts_dir=charts_dir,
+        models=models,
+        book_results=book_results,
+        summary_path=summary_path,
+    )
+
+    lines.extend(["", "## 성능 비교 그래프", ""])
+    chart_titles = {
+        "compare_elapsed.png": "집필 소요 시간 (분)",
+        "compare_chapters.png": "완성 챕터 수",
+        "compare_gpu_avg.png": "GPU 사용량 평균 (VRAM·util·전력)",
+        "compare_vram_timeseries.png": "VRAM 시계열 (4 GPU 합산)",
+    }
+    for chart_path in chart_paths:
+        filename = Path(chart_path).name
+        title = chart_titles.get(filename, filename)
+        lines.extend([f"### {title}", "", f"![{title}]({chart_path})", ""])
+
     lines.extend(
         [
-            "",
             "## GPU 사용량 요약",
             "",
             "각 셀은 **최소 / 평균 / 최대** 순입니다.",
@@ -215,6 +391,7 @@ def generate_output_readme(
             "",
             "## 참고",
             "",
+            "- 그래프 원본: `charts/`",
             "- 상세 시계열: `gpu_usage.csv`",
             "- 세션별 텍스트 로그: `gpu_usage_summary.log`, `agent.log`",
             "- 집필 JSON 요약: `comparison_summary.json`",
