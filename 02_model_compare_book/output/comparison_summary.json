@@ -1,0 +1,633 @@
+{
+  "updated_at": "2026-06-17T14:45:46.821118",
+  "models": [
+    {
+      "model": "gemma4:31b",
+      "slug": "gemma4_31b",
+      "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_31b",
+      "title": "AI 기반 반도체 공정 이상감지 및 최적화 가이드",
+      "chapter_count": 6,
+      "elapsed_seconds": 1788.8,
+      "status": "ok",
+      "finished_at": "2026-06-17T11:33:59.163163",
+      "gpu_stats": {
+        "model": "gemma4:31b",
+        "started_at": "2026-06-17 11:04:10",
+        "finished_at": "2026-06-17 11:33:59",
+        "interval_sec": 5.0,
+        "sample_count": 352,
+        "gpu_count": 4,
+        "per_gpu": {
+          "0": {
+            "gpu_name": "GPU 0",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4047.0,
+                "max": 4047.0,
+                "avg": 4047.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 25.0,
+                "avg": 24.87
+              },
+              "power_w": {
+                "min": 18.11,
+                "max": 18.95,
+                "avg": 18.46
+              }
+            }
+          },
+          "1": {
+            "gpu_name": "GPU 1",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4041.0,
+                "max": 4041.0,
+                "avg": 4041.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 25.0,
+                "avg": 24.87
+              },
+              "power_w": {
+                "min": 21.44,
+                "max": 24.51,
+                "avg": 22.76
+              }
+            }
+          },
+          "2": {
+            "gpu_name": "GPU 2",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 3557.0,
+                "max": 3557.0,
+                "avg": 3557.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 25.0,
+                "avg": 24.81
+              },
+              "power_w": {
+                "min": 15.47,
+                "max": 17.81,
+                "avg": 16.75
+              }
+            }
+          },
+          "3": {
+            "gpu_name": "GPU 3",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 89.0,
+                "avg": 8.81
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 29.0,
+                "avg": 7.42
+              },
+              "mem_used_mb": {
+                "min": 6794.0,
+                "max": 23759.0,
+                "avg": 23658.09
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 41.0,
+                "avg": 27.45
+              },
+              "power_w": {
+                "min": 28.6,
+                "max": 160.49,
+                "avg": 90.1
+              }
+            }
+          }
+        },
+        "aggregate": {
+          "total_gpu_util_pct": {
+            "min": 0.0,
+            "max": 89.0,
+            "avg": 8.81
+          },
+          "total_mem_used_mb": {
+            "min": 18439.0,
+            "max": 35404.0,
+            "avg": 35303.09
+          },
+          "total_power_w": {
+            "min": 85.15,
+            "max": 218.24,
+            "avg": 148.07
+          }
+        }
+      }
+    },
+    {
+      "model": "gemma4:26b",
+      "slug": "gemma4_26b",
+      "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_26b",
+      "title": "반도체 AI 어시스턴트 플랫폼: 차세대 공정 지능화 가이드",
+      "chapter_count": 5,
+      "elapsed_seconds": 377.9,
+      "status": "ok",
+      "finished_at": "2026-06-17T11:40:19.542862",
+      "gpu_stats": {
+        "model": "gemma4:26b",
+        "started_at": "2026-06-17 11:34:01",
+        "finished_at": "2026-06-17 11:40:19",
+        "interval_sec": 5.0,
+        "sample_count": 75,
+        "gpu_count": 4,
+        "per_gpu": {
+          "0": {
+            "gpu_name": "GPU 0",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4047.0,
+                "max": 4047.0,
+                "avg": 4047.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 18.18,
+                "max": 18.69,
+                "avg": 18.48
+              }
+            }
+          },
+          "1": {
+            "gpu_name": "GPU 1",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4041.0,
+                "max": 4041.0,
+                "avg": 4041.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 21.62,
+                "max": 23.44,
+                "avg": 22.5
+              }
+            }
+          },
+          "2": {
+            "gpu_name": "GPU 2",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 3557.0,
+                "max": 3557.0,
+                "avg": 3557.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 16.32,
+                "max": 17.6,
+                "avg": 16.95
+              }
+            }
+          },
+          "3": {
+            "gpu_name": "GPU 3",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 55.0,
+                "avg": 13.13
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 13.0,
+                "avg": 7.48
+              },
+              "mem_used_mb": {
+                "min": 6786.0,
+                "max": 24102.0,
+                "avg": 23633.57
+              },
+              "temp_c": {
+                "min": 26.0,
+                "max": 30.0,
+                "avg": 27.8
+              },
+              "power_w": {
+                "min": 29.87,
+                "max": 183.22,
+                "avg": 92.88
+              }
+            }
+          }
+        },
+        "aggregate": {
+          "total_gpu_util_pct": {
+            "min": 0.0,
+            "max": 55.0,
+            "avg": 13.13
+          },
+          "total_mem_used_mb": {
+            "min": 18431.0,
+            "max": 35747.0,
+            "avg": 35278.57
+          },
+          "total_power_w": {
+            "min": 88.73,
+            "max": 241.64,
+            "avg": 150.8
+          }
+        }
+      }
+    },
+    {
+      "model": "qwen3.6:35b",
+      "slug": "qwen3_6_35b",
+      "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b",
+      "title": "반도체 AI 이상감지 모델 성능 비교 가이드",
+      "chapter_count": 0,
+      "elapsed_seconds": 149.8,
+      "status": "ok",
+      "finished_at": "2026-06-17T11:42:51.933631",
+      "gpu_stats": {
+        "model": "qwen3.6:35b",
+        "started_at": "2026-06-17 11:40:22",
+        "finished_at": "2026-06-17 11:42:51",
+        "interval_sec": 5.0,
+        "sample_count": 30,
+        "gpu_count": 4,
+        "per_gpu": {
+          "0": {
+            "gpu_name": "GPU 0",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4047.0,
+                "max": 4047.0,
+                "avg": 4047.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 18.24,
+                "max": 18.95,
+                "avg": 18.58
+              }
+            }
+          },
+          "1": {
+            "gpu_name": "GPU 1",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4041.0,
+                "max": 4041.0,
+                "avg": 4041.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 22.51,
+                "max": 24.33,
+                "avg": 23.29
+              }
+            }
+          },
+          "2": {
+            "gpu_name": "GPU 2",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 3557.0,
+                "max": 3557.0,
+                "avg": 3557.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
+              },
+              "power_w": {
+                "min": 15.92,
+                "max": 17.6,
+                "avg": 16.9
+              }
+            }
+          },
+          "3": {
+            "gpu_name": "GPU 3",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 65.0,
+                "avg": 18.77
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 15.0,
+                "avg": 2.2
+              },
+              "mem_used_mb": {
+                "min": 6786.0,
+                "max": 23522.0,
+                "avg": 22404.33
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 35.0,
+                "avg": 27.37
+              },
+              "power_w": {
+                "min": 28.57,
+                "max": 106.04,
+                "avg": 82.71
+              }
+            }
+          }
+        },
+        "aggregate": {
+          "total_gpu_util_pct": {
+            "min": 0.0,
+            "max": 65.0,
+            "avg": 18.77
+          },
+          "total_mem_used_mb": {
+            "min": 18431.0,
+            "max": 35167.0,
+            "avg": 34049.33
+          },
+          "total_power_w": {
+            "min": 85.9,
+            "max": 165.09,
+            "avg": 141.47
+          }
+        }
+      }
+    },
+    {
+      "model": "qwen3-vl:32b",
+      "slug": "qwen3_vl_32b",
+      "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b",
+      "title": "반도체 AI 어시스턴트 플랫폼 활용 가이드: 공정 최적화와 실시간 분석",
+      "chapter_count": 7,
+      "elapsed_seconds": 10969.9,
+      "status": "ok",
+      "finished_at": "2026-06-17T14:45:44.278769",
+      "gpu_stats": {
+        "model": "qwen3-vl:32b",
+        "started_at": "2026-06-17 11:42:54",
+        "finished_at": "2026-06-17 14:45:44",
+        "interval_sec": 5.0,
+        "sample_count": 2158,
+        "gpu_count": 4,
+        "per_gpu": {
+          "0": {
+            "gpu_name": "GPU 0",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4047.0,
+                "max": 4047.0,
+                "avg": 4047.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 26.0,
+                "avg": 25.14
+              },
+              "power_w": {
+                "min": 17.75,
+                "max": 18.77,
+                "avg": 18.36
+              }
+            }
+          },
+          "1": {
+            "gpu_name": "GPU 1",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4041.0,
+                "max": 4041.0,
+                "avg": 4041.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 26.0,
+                "avg": 25.15
+              },
+              "power_w": {
+                "min": 21.22,
+                "max": 24.93,
+                "avg": 22.88
+              }
+            }
+          },
+          "2": {
+            "gpu_name": "GPU 2",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 3557.0,
+                "max": 3557.0,
+                "avg": 3557.0
+              },
+              "temp_c": {
+                "min": 25.0,
+                "max": 26.0,
+                "avg": 25.1
+              },
+              "power_w": {
+                "min": 15.1,
+                "max": 17.9,
+                "avg": 16.59
+              }
+            }
+          },
+          "3": {
+            "gpu_name": "GPU 3",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 82.0,
+                "avg": 3.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 28.0,
+                "avg": 2.7
+              },
+              "mem_used_mb": {
+                "min": 6786.0,
+                "max": 23826.0,
+                "avg": 23767.48
+              },
+              "temp_c": {
+                "min": 26.0,
+                "max": 42.0,
+                "avg": 27.17
+              },
+              "power_w": {
+                "min": 28.29,
+                "max": 146.07,
+                "avg": 79.33
+              }
+            }
+          }
+        },
+        "aggregate": {
+          "total_gpu_util_pct": {
+            "min": 0.0,
+            "max": 82.0,
+            "avg": 3.0
+          },
+          "total_mem_used_mb": {
+            "min": 18431.0,
+            "max": 35471.0,
+            "avg": 35412.48
+          },
+          "total_power_w": {
+            "min": 84.82,
+            "max": 203.58,
+            "avg": 137.16
+          }
+        }
+      }
+    }
+  ]
+}

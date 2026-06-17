@@ -254,3 +254,11 @@
 2026-06-17 14:45:44 | INFO | SESSION END | 2026-06-17 14:45:44 | model=qwen3-vl:32b | status=ok | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b | gpu_util_avg=3.0% | gpu_util_max=82.0% | elapsed=3h 2m 49s
 2026-06-17 14:45:44 | INFO | ================================================================================
 2026-06-17 14:45:44 | INFO | 
+2026-06-17 14:45:44 | INFO | SYNC OK   | commit: [qwen3-vl:32b] Model compare book output
+2026-06-17 14:45:46 | INFO | PUSH OK   | origin/main
+2026-06-17 14:45:46 | INFO | COMPARE | done model 4/4: qwen3-vl:32b | status=ok | elapsed=10969.9s
+2026-06-17 14:45:46 | INFO | SUMMARY  | saved /data1/github_cschae/adk-agent-lab/02_model_compare_book/output/comparison_summary.json
+2026-06-17 14:45:46 | INFO | --------------------------------------------------------------------------------
+2026-06-17 14:45:46 | INFO | SESSION END | 2026-06-17 14:45:46 | mode=compare_batch | models=4 | elapsed=13296.5s
+2026-06-17 14:45:46 | INFO | ================================================================================
+2026-06-17 14:45:46 | INFO | 
