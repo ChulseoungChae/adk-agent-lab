@@ -77,3 +77,16 @@
 2026-06-17 11:33:59 | INFO | SESSION END | 2026-06-17 11:33:59 | model=gemma4:31b | status=ok | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_31b | gpu_util_avg=8.81% | gpu_util_max=89.0% | elapsed=29m 48s
 2026-06-17 11:33:59 | INFO | ================================================================================
 2026-06-17 11:33:59 | INFO | 
+2026-06-17 11:33:59 | INFO | SYNC OK   | commit: [gemma4:31b] Model compare book output
+2026-06-17 11:34:01 | INFO | PUSH OK   | origin/main
+2026-06-17 11:34:01 | INFO | COMPARE | done model 1/4: gemma4:31b | status=ok | elapsed=1788.8s
+2026-06-17 11:34:01 | INFO | COMPARE | start model 2/4: gemma4:26b
+2026-06-17 11:34:01 | INFO | 
+2026-06-17 11:34:01 | INFO | ================================================================================
+2026-06-17 11:34:01 | INFO | SESSION START | 2026-06-17 11:34:01 | mode=compare | model=gemma4:26b | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_26b | log=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/agent.log | progress=2/4
+2026-06-17 11:34:01 | INFO | ================================================================================
+2026-06-17 11:34:01 | INFO | PROMPT | http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
+(실시간 이상감지, 과거 공정 이력, 공정 결과 추론, 문서/RAG, 리포트)을
+반도체 공정 엔지니어 대상 **한국어*...
+2026-06-17 11:34:01 | INFO | OLLAMA   | prepare gemma4:26b (no models were running)
+2026-06-17 11:36:19 | INFO | TOOL START | save_book_metadata(audience='반도체 공정 및 설비 엔지니어', subtitle='실시간 이상감지부터 데이터 기반 의사결정까지: AI 플랫폼 활용 가이드', theme='반도체 AI 어시스턴트 플랫폼의 핵심 기능과 데이터 기반 공정 최적화 전략', title='반도체 AI 어시스턴트 플랫폼: 차세대 공정 지능화 가이드')

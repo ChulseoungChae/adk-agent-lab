@@ -1,0 +1,9 @@
+{
+  "title": "반도체 AI 어시스턴트 플랫폼: 차세대 공정 지능화 가이드",
+  "subtitle": "실시간 이상감지부터 데이터 기반 의사결정까지: AI 플랫폼 활용 가이드",
+  "audience": "반도체 공정 및 설비 엔지니어",
+  "theme": "반도체 AI 어시스턴트 플랫폼의 핵심 기능과 데이터 기반 공정 최적화 전략",
+  "updated_at": "2026-06-17T11:36:19.497137",
+  "model": "gemma4:26b",
+  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/gemma4_26b"
+}
