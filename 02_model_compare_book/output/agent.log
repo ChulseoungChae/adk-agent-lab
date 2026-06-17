@@ -165,3 +165,16 @@
 2026-06-17 11:42:51 | INFO | SESSION END | 2026-06-17 11:42:51 | model=qwen3.6:35b | status=ok | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b | gpu_util_avg=18.77% | gpu_util_max=65.0% | elapsed=2m 29s
 2026-06-17 11:42:51 | INFO | ================================================================================
 2026-06-17 11:42:51 | INFO | 
+2026-06-17 11:42:51 | INFO | SYNC OK   | commit: [qwen3.6:35b] Model compare book output
+2026-06-17 11:42:54 | INFO | PUSH OK   | origin/main
+2026-06-17 11:42:54 | INFO | COMPARE | done model 3/4: qwen3.6:35b | status=ok | elapsed=149.8s
+2026-06-17 11:42:54 | INFO | COMPARE | start model 4/4: qwen3-vl:32b
+2026-06-17 11:42:54 | INFO | 
+2026-06-17 11:42:54 | INFO | ================================================================================
+2026-06-17 11:42:54 | INFO | SESSION START | 2026-06-17 11:42:54 | mode=compare | model=qwen3-vl:32b | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b | log=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/agent.log | progress=4/4
+2026-06-17 11:42:54 | INFO | ================================================================================
+2026-06-17 11:42:54 | INFO | PROMPT | http://bigsoft.iptime.org:10200/ 반도체 AI 어시스턴트 플랫폼의 기능
+(실시간 이상감지, 과거 공정 이력, 공정 결과 추론, 문서/RAG, 리포트)을
+반도체 공정 엔지니어 대상 **한국어*...
+2026-06-17 11:42:54 | INFO | OLLAMA   | prepare qwen3-vl:32b (no models were running)
+2026-06-17 11:48:07 | INFO | TOOL START | save_book_metadata(title='반도체 ALD/PVD 공정 AI 최적화 가이드: 실시간 이상감지 및 예측 분석', subtitle='실무 엔지니어를 위한 데이터 기반 공정 관리', audience='반도체 공정 엔지니어 및 AI 시스템 관리자', theme='AI 기반 공정 최적화, 이상 감지 기술, 실시간 데이터 분석')

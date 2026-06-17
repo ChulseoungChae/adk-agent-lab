@@ -1,0 +1,9 @@
+{
+  "title": "반도체 ALD/PVD 공정 AI 최적화 가이드: 실시간 이상감지 및 예측 분석",
+  "subtitle": "실무 엔지니어를 위한 데이터 기반 공정 관리",
+  "audience": "반도체 공정 엔지니어 및 AI 시스템 관리자",
+  "theme": "AI 기반 공정 최적화, 이상 감지 기술, 실시간 데이터 분석",
+  "updated_at": "2026-06-17T11:48:07.406024",
+  "model": "qwen3-vl:32b",
+  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_vl_32b"
+}
