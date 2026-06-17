@@ -146,3 +146,22 @@
 반도체 공정 엔지니어 대상 **한국어*...
 2026-06-17 11:40:22 | INFO | OLLAMA   | prepare qwen3.6:35b (no models were running)
 2026-06-17 11:41:20 | INFO | TOOL START | save_book_metadata(audience='반도체 공정 엔지니어 및 데이터 사이언티스트', subtitle='실시간 이상감지부터 예측 모델까지, 플랫폼 데이터로 검증하는 반도체 공정 AI', theme='반도체 AI 어시스턴트 플랫폼을 활용한 모델별 성능 비교 및 실전 적용', title='반도체 AI 이상감지 모델 성능 비교 가이드')
+2026-06-17 11:41:20 | INFO | SYNC OK   | commit: [qwen3.6:35b] Update book metadata: 반도체 AI 이상감지 모델 성능 비교 가이드
+2026-06-17 11:41:23 | INFO | PUSH OK   | origin/main
+2026-06-17 11:41:23 | INFO | TOOL OK   | save_book_metadata -> {'status': 'saved', 'path': '/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b/book_metadata.json', 'metadata': {'title': '반도체 AI 이상감지 모델 성능 비교 가이드', 'subtitle': '실시간 이상감지...
+2026-06-17 11:41:42 | INFO | TOOL START | fetch_anomaly_logs(limit=20)
+2026-06-17 11:41:42 | INFO | TOOL OK   | fetch_anomaly_logs -> {'total': 50, 'shown': 20, 'items': [{'timestamp': '2026-03-18 15:11:47.000', 'parameter': 'MFC8_NH3', 'message': '{"parameter": "MFC8_NH3", "start": "2026-03-18T15:11:47", "end": "2026-03-18T15:11...
+2026-06-17 11:41:42 | INFO | TOOL START | fetch_prediction_logs(limit=20)
+2026-06-17 11:41:42 | INFO | TOOL OK   | fetch_prediction_logs -> {'total': 50, 'shown': 20, 'items': [{'timestamp': '2026-01-11 11:04:36.000', 'parameter': 'MFC4_N2-4', 'message': '{"parameter": "MFC4_N2-4", "start": "2026-01-11T11:04:27", "end": "2026-01-11T11:...
+2026-06-17 11:41:42 | INFO | TOOL START | list_platform_reports(limit=10)
+2026-06-17 11:41:42 | INFO | TOOL OK   | list_platform_reports -> {'total': 117, 'shown': 10, 'items': [{'report_id': 'report_monthly_2026-01', 'title': 'MONTHLY 리포트 (2026-01-01 00:00 ~ 2026-02-01 23:59)', 'created_at': '2026-02-24T16:04:28.073797', 'url': '/api/...
+2026-06-17 11:41:42 | INFO | TOOL START | fetch_equipment_history(limit=10, process_recipe='')
+2026-06-17 11:41:43 | INFO | TOOL OK   | fetch_equipment_history -> {'total': 67, 'shown': 10, 'items': [{'no': 1, 'pjob_id': 'KE-PJ00000000012', 'process_recipe': 'RUN\\0_P_IH_HD02', 'process_start_time': '2026-01-12 14:12:17', 'process_end_time': '2026-01-12 16:5...
+2026-06-17 11:41:43 | INFO | TOOL START | fetch_generator_status()
+2026-06-17 11:41:43 | INFO | TOOL OK   | fetch_generator_status -> {'status': 'RUN', 'last_tick': '2026-06-17T11:41:42.731301'}
+2026-06-17 11:41:43 | INFO | TOOL START | search_process_recipes()
+2026-06-17 11:41:43 | INFO | TOOL OK   | search_process_recipes -> {'recipes': ['전체', 'RUN\\0_P_IH_HD02', 'RUN\\0_P_IH_HD02-1']}
+2026-06-17 11:42:51 | INFO | --------------------------------------------------------------------------------
+2026-06-17 11:42:51 | INFO | SESSION END | 2026-06-17 11:42:51 | model=qwen3.6:35b | status=ok | output=/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b | gpu_util_avg=18.77% | gpu_util_max=65.0% | elapsed=2m 29s
+2026-06-17 11:42:51 | INFO | ================================================================================
+2026-06-17 11:42:51 | INFO | 

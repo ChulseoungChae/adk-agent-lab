@@ -5,5 +5,8 @@
   "theme": "반도체 AI 어시스턴트 플랫폼을 활용한 모델별 성능 비교 및 실전 적용",
   "updated_at": "2026-06-17T11:41:20.956385",
   "model": "qwen3.6:35b",
-  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b"
+  "output_dir": "/data1/github_cschae/adk-agent-lab/02_model_compare_book/output/qwen3_6_35b",
+  "elapsed_seconds": 149.8,
+  "status": "ok",
+  "finished_at": "2026-06-17T11:42:51.933288"
 }
