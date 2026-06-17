@@ -3,39 +3,48 @@
 from __future__ import annotations
 
 import csv
+import os
 import subprocess
 import threading
-import time
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-CSV_FIELDS = [
-    "timestamp",
-    "model",
-    "gpu_index",
-    "gpu_name",
-    "gpu_util_pct",
-    "mem_util_pct",
-    "mem_used_mb",
-    "mem_total_mb",
-    "temperature_c",
-    "power_w",
+MAX_GPUS = int(os.getenv("GPU_MONITOR_COUNT", "4"))
+
+PER_GPU_METRICS = [
+    ("gpu_util_pct", "util_pct"),
+    ("mem_util_pct", "mem_util_pct"),
+    ("mem_used_mb", "mem_used_mb"),
+    ("temperature_c", "temp_c"),
+    ("power_w", "power_w"),
 ]
 
-STAT_FIELDS = [
-    "gpu_util_pct",
-    "mem_util_pct",
-    "mem_used_mb",
-    "temperature_c",
-    "power_w",
+TOTAL_FIELDS = [
+    "total_gpu_util_pct",
+    "total_mem_used_mb",
+    "total_power_w",
 ]
 
 SMI_QUERY = (
     "index,name,utilization.gpu,utilization.memory,"
     "memory.used,memory.total,temperature.gpu,power.draw"
 )
+
+
+def _csv_fields(max_gpus: int = MAX_GPUS) -> list[str]:
+    fields = ["timestamp", "model"]
+    for index in range(max_gpus):
+        for _, short_name in PER_GPU_METRICS:
+            fields.append(f"gpu{index}_{short_name}")
+    fields.extend(TOTAL_FIELDS)
+    return fields
+
+
+CSV_FIELDS = _csv_fields()
+
+STAT_FIELDS = [short for _, short in PER_GPU_METRICS]
 
 
 def _now() -> str:
@@ -83,6 +92,38 @@ def _query_gpus() -> list[dict[str, Any]]:
     return rows
 
 
+def _build_wide_row(
+    timestamp: str,
+    model: str,
+    gpu_rows: list[dict[str, Any]],
+    *,
+    max_gpus: int = MAX_GPUS,
+) -> dict[str, Any]:
+    by_index = {int(gpu["gpu_index"]): gpu for gpu in gpu_rows}
+    row: dict[str, Any] = {"timestamp": timestamp, "model": model}
+
+    total_util = 0.0
+    total_mem = 0.0
+    total_power = 0.0
+
+    for index in range(max_gpus):
+        gpu = by_index.get(index)
+        for source_key, short_name in PER_GPU_METRICS:
+            col = f"gpu{index}_{short_name}"
+            value = float(gpu[source_key]) if gpu else 0.0
+            row[col] = round(value, 2)
+
+        if gpu:
+            total_util += float(gpu["gpu_util_pct"])
+            total_mem += float(gpu["mem_used_mb"])
+            total_power += float(gpu["power_w"])
+
+    row["total_gpu_util_pct"] = round(total_util, 2)
+    row["total_mem_used_mb"] = round(total_mem, 2)
+    row["total_power_w"] = round(total_power, 2)
+    return row
+
+
 def _stat(values: list[float]) -> dict[str, float]:
     if not values:
         return {"min": 0.0, "max": 0.0, "avg": 0.0}
@@ -94,27 +135,25 @@ def _stat(values: list[float]) -> dict[str, float]:
 
 
 def compute_gpu_stats(samples: list[dict[str, Any]]) -> dict[str, Any]:
-    by_gpu: dict[int, list[dict[str, Any]]] = defaultdict(list)
-    for sample in samples:
-        by_gpu[int(sample["gpu_index"])].append(sample)
-
     per_gpu: dict[str, Any] = {}
-    for gpu_index in sorted(by_gpu):
-        gpu_samples = by_gpu[gpu_index]
-        gpu_name = gpu_samples[0].get("gpu_name", f"GPU {gpu_index}")
+    for index in range(MAX_GPUS):
         metrics: dict[str, dict[str, float]] = {}
-        for field in STAT_FIELDS:
-            metrics[field] = _stat(
-                [float(sample[field]) for sample in gpu_samples]
-            )
-        per_gpu[str(gpu_index)] = {
-            "gpu_name": gpu_name,
-            "metrics": metrics,
-        }
+        has_data = False
+        for _, short_name in PER_GPU_METRICS:
+            key = f"gpu{index}_{short_name}"
+            values = [float(sample.get(key, 0)) for sample in samples]
+            metrics[short_name] = _stat(values)
+            if any(value > 0 for value in values):
+                has_data = True
+        if has_data:
+            per_gpu[str(index)] = {
+                "gpu_name": f"GPU {index}",
+                "metrics": metrics,
+            }
 
     aggregate: dict[str, dict[str, float]] = {}
-    for field in STAT_FIELDS:
-        aggregate[field] = _stat([float(sample[field]) for sample in samples])
+    for field in TOTAL_FIELDS:
+        aggregate[field] = _stat([float(sample.get(field, 0)) for sample in samples])
 
     return {
         "sample_count": len(samples),
@@ -141,6 +180,7 @@ class GpuMonitor:
         self.summary_log_path = summary_log_path
         self.interval_sec = interval_sec
         self.enabled = enabled
+        self._csv_fields = _csv_fields()
         self._samples: list[dict[str, Any]] = []
         self._lock = threading.Lock()
         self._stop_event = threading.Event()
@@ -211,32 +251,35 @@ class GpuMonitor:
     def _sample_once(self) -> None:
         timestamp = _now()
         gpu_rows = _query_gpus()
-        rows: list[dict[str, Any]] = []
-        for gpu in gpu_rows:
-            row = {
-                "timestamp": timestamp,
-                "model": self.model,
-                **gpu,
-            }
-            rows.append(row)
+        row = _build_wide_row(timestamp, self.model, gpu_rows)
 
         with self._lock:
-            self._samples.extend(rows)
-        self._append_csv_rows(rows)
+            self._samples.append(row)
+        self._append_csv_row(row)
 
     def _ensure_csv_header(self) -> None:
         self.csv_path.parent.mkdir(parents=True, exist_ok=True)
         if self.csv_path.exists() and self.csv_path.stat().st_size > 0:
+            with self.csv_path.open("r", encoding="utf-8") as handle:
+                header = handle.readline().strip()
+            expected = ",".join(self._csv_fields)
+            if header != expected:
+                backup = self.csv_path.with_name(
+                    f"{self.csv_path.stem}_legacy_{_now().replace(':', '').replace(' ', '_')}.csv"
+                )
+                self.csv_path.rename(backup)
+
+        if self.csv_path.exists() and self.csv_path.stat().st_size > 0:
             return
+
         with self.csv_path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS)
+            writer = csv.DictWriter(handle, fieldnames=self._csv_fields)
             writer.writeheader()
 
-    def _append_csv_rows(self, rows: list[dict[str, Any]]) -> None:
+    def _append_csv_row(self, row: dict[str, Any]) -> None:
         with self.csv_path.open("a", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS)
-            for row in rows:
-                writer.writerow(row)
+            writer = csv.DictWriter(handle, fieldnames=self._csv_fields)
+            writer.writerow(row)
 
     def _append_summary_line(self, line: str) -> None:
         self.summary_log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -268,7 +311,7 @@ class GpuMonitor:
                         f"  {metric}: min={values['min']} max={values['max']} avg={values['avg']}"
                     )
             lines.append(subsep)
-            lines.append("AGGREGATE (all GPUs, all samples)")
+            lines.append("TOTAL (4 GPU 합산, 샘플별)")
             for metric, values in stats.get("aggregate", {}).items():
                 lines.append(
                     f"  {metric}: min={values['min']} max={values['max']} avg={values['avg']}"

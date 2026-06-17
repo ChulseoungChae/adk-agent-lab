@@ -54,6 +54,13 @@ python3 run.py sync         # 수동 commit+push
 
 각 모델 집필이 끝나면 `output/{모델}/`에 결과가 저장되고, `comparison_summary.json`에 소요 시간·챕터 수가 기록됩니다.
 
+**4개 모델 compare 완료 후** `output/README.md`가 자동 생성됩니다 (`gpu_usage.csv` 기반 GPU·VRAM 표).  
+이미 CSV가 있으면 수동 재생성:
+
+```bash
+python3 run.py report
+```
+
 ## 로그
 
 `output/agent.log`에 세션마다 구분선이 삽입됩니다.
@@ -64,7 +71,7 @@ python3 run.py sync         # 수동 commit+push
 
 | 파일 | 내용 |
 |------|------|
-| `output/gpu_usage.csv` | 시계열 샘플 (모델·GPU별) |
+| `output/gpu_usage.csv` | 시계열 샘플 (타임스탬프당 1행, GPU 0~3 + 합산 컬럼) |
 | `output/gpu_usage_summary.log` | 모델 작업 종료 시 min/max/avg 통계 |
 
 ```bash
@@ -79,3 +86,28 @@ export GPU_MONITOR_ENABLED=0
 - **5초 (기본)** — 수 분~수십 분 집필에 적합. 파일 크기·부하 균형이 좋음.
 - **2초** — GPU 활용 스파이크를 더 촘촘히 보고 싶을 때.
 - **10초** — 장시간 배치·대략적 추세만 필요할 때.
+
+## 자주 발생하는 오류
+
+| 오류 | 원인 | 대응 |
+|------|------|------|
+| `litellm.Timeout` (600s) | 대형 모델 + 긴 챕터 생성이 한 번의 LLM 호출 제한을 초과 | 기본 **1800초**로 연장됨. `export LITELLM_TIMEOUT_SEC=3600` |
+| `model failed to load` | 이전 모델이 VRAM을 점유한 채 다음 모델 로드 시도 | 모델 전환 시 `ollama stop`으로 자동 언로드 (20초 대기) |
+| 중간에 `status=failed` | 위 오류로 해당 모델만 실패, 다음 모델로 계속 진행 | 실패 모델만 `python3 run.py single`로 재실행 |
+
+```bash
+# 타임아웃·재시도·모델 전환 대기 조정
+export LITELLM_TIMEOUT_SEC=1800
+export MODEL_SWITCH_DELAY_SEC=30
+export MODEL_RUN_MAX_RETRIES=2
+export COMPARE_CHAPTER_MAX=6   # 비교용 챕터 수 (5~6권장)
+```
+
+**CSV 컬럼 예시** (5초마다 1행):
+
+`timestamp`, `model`, `gpu0_util_pct` … `gpu3_power_w`, `total_gpu_util_pct`, `total_mem_used_mb`, `total_power_w`
+
+- GPU별: `gpu{0-3}_util_pct`, `mem_util_pct`, `mem_used_mb`, `temp_c`, `power_w`
+- **합산**: `total_gpu_util_pct` (4 GPU util 합), `total_mem_used_mb`, `total_power_w`
+
+기존 형식 CSV가 있으면 자동으로 `gpu_usage_legacy_*.csv`로 백업 후 새 헤더로 기록합니다.

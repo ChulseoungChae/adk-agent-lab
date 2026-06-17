@@ -9,7 +9,7 @@ from .book_tools import (
     save_outline,
     write_chapter,
 )
-from .config import OLLAMA_MODEL
+from .config import COMPARE_CHAPTER_MAX, COMPARE_CHAPTER_MIN, LITELLM_TIMEOUT_SEC, OLLAMA_MODEL
 from .platform_tools import (
     create_platform_report,
     fetch_anomaly_logs,
@@ -42,8 +42,9 @@ http://bigsoft.iptime.org:10200 반도체 AI 어시스턴트 플랫폼의 실제
    - fetch_equipment_history: 과거 공정 이력
    - list_platform_reports / get_report_content: 통계 리포트
    - fetch_generator_status: 장비·데이터 수집 상태
-3. 수집한 자료를 바탕으로 **한국어** 목차(8~12장)를 save_outline으로 저장하세요.
+3. 수집한 자료를 바탕으로 **한국어** 목차({chapter_min}~{chapter_max}장)를 save_outline으로 저장하세요.
 4. 모든 챕터를 **한국어**로 write_chapter에 저장하세요. 중간에 사용자에게 질문하지 마세요.
+   - 모델 비교용이므로 챕터당 **800~1500자** 분량으로 간결하게 작성하세요.
 5. 완료 후 read_book_state로 결과를 확인하세요.
 
 ## 자율 집필 규칙
@@ -56,10 +57,17 @@ http://bigsoft.iptime.org:10200 반도체 AI 어시스턴트 플랫폼의 실제
 - Markdown 형식(소제목, 목록, 표)을 사용하세요. 표 헤더·본문도 한국어로 작성하세요.
 - 데이터가 없으면 솔직히 한국어로 말하고, 가능한 범위에서 일반 원리를 설명하세요.
 - 도구 호출이 필요 없는 일반 질문에는 한국어로 직접 답변하세요.
-""".format(model=OLLAMA_MODEL)
+""".format(
+    model=OLLAMA_MODEL,
+    chapter_min=COMPARE_CHAPTER_MIN,
+    chapter_max=COMPARE_CHAPTER_MAX,
+)
 
 root_agent = Agent(
-    model=LiteLlm(model=f"ollama_chat/{OLLAMA_MODEL}"),
+    model=LiteLlm(
+        model=f"ollama_chat/{OLLAMA_MODEL}",
+        timeout=LITELLM_TIMEOUT_SEC,
+    ),
     name="model_compare_book_writer",
     description=(
         "반도체 AI 어시스턴트 플랫폼 데이터를 활용해 "

@@ -57,8 +57,16 @@ CHAPTERS_DIR.mkdir(parents=True, exist_ok=True)
 LOG_PATH = OUTPUT_ROOT / "agent.log"
 GPU_CSV_PATH = OUTPUT_ROOT / "gpu_usage.csv"
 GPU_SUMMARY_LOG_PATH = OUTPUT_ROOT / "gpu_usage_summary.log"
+OUTPUT_README_PATH = OUTPUT_ROOT / "README.md"
 GPU_MONITOR_ENABLED = os.getenv("GPU_MONITOR_ENABLED", "1") == "1"
 GPU_MONITOR_INTERVAL_SEC = float(os.getenv("GPU_MONITOR_INTERVAL_SEC", "5"))
+
+LITELLM_TIMEOUT_SEC = int(os.getenv("LITELLM_TIMEOUT_SEC", "1800"))
+MODEL_SWITCH_DELAY_SEC = float(os.getenv("MODEL_SWITCH_DELAY_SEC", "20"))
+MODEL_RUN_MAX_RETRIES = int(os.getenv("MODEL_RUN_MAX_RETRIES", "2"))
+ADK_MAX_ROUNDS = int(os.getenv("ADK_MAX_ROUNDS", "12"))
+COMPARE_CHAPTER_MIN = int(os.getenv("COMPARE_CHAPTER_MIN", "5"))
+COMPARE_CHAPTER_MAX = int(os.getenv("COMPARE_CHAPTER_MAX", "6"))
 
 PROJECT_ID = _PROJECT_DIR.name
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "30"))

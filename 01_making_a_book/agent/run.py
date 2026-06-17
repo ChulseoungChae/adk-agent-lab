@@ -86,7 +86,7 @@ def _run_with_gpu_monitor(mode: str, extra_args: list[str] | None = None) -> Non
         gpu_stats = monitor.stop()
         end_meta: dict[str, str] = {"model": OLLAMA_MODEL}
         if gpu_stats and gpu_stats.get("sample_count", 0) > 0:
-            agg = gpu_stats.get("aggregate", {}).get("gpu_util_pct", {})
+            agg = gpu_stats.get("aggregate", {}).get("total_gpu_util_pct", {})
             end_meta["gpu_util_avg"] = f"{agg.get('avg', 0)}%"
             end_meta["gpu_util_max"] = f"{agg.get('max', 0)}%"
         log_session_end(**end_meta)
