@@ -1,8 +1,4 @@
 {
-  "model": "gemma4:26b",
-  "elapsed_seconds": 4.1,
-  "status": "failed",
-  "validation_score": 0.0,
-  "validation_complete": false,
-  "finished_at": "2026-06-18T18:47:18.310446"
+  "title": "센서 데이터 통계 분석 결과 보고서",
+  "updated_at": "2026-06-18T18:52:56.042451"
 }

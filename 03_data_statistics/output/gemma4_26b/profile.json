@@ -1,0 +1,133 @@
+{
+  "row_count": 200,
+  "column_count": 7,
+  "columns": [
+    {
+      "name": "timestamp",
+      "dtype": "datetime64[ns]",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 200,
+      "kind": "datetime",
+      "min": "2026-06-01T08:00:00",
+      "max": "2026-06-02T00:35:00"
+    },
+    {
+      "name": "equipment_id",
+      "dtype": "object",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 2,
+      "kind": "categorical",
+      "top_values": {
+        "EQP-A01": 100,
+        "EQP-A02": 100
+      }
+    },
+    {
+      "name": "recipe",
+      "dtype": "object",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 3,
+      "kind": "categorical",
+      "top_values": {
+        "ALD_SiO2_001": 67,
+        "ALD_SiO2_002": 67,
+        "PVD_TiN_010": 66
+      }
+    },
+    {
+      "name": "chamber_pressure",
+      "dtype": "float64",
+      "missing_count": 6,
+      "missing_pct": 3.0,
+      "unique_count": 178,
+      "kind": "numeric",
+      "stats": {
+        "count": 194.0,
+        "mean": 3.058680412371134,
+        "std": 0.8102524271979319,
+        "min": 2.113,
+        "25%": 2.4515000000000002,
+        "50%": 2.5975,
+        "75%": 4.094,
+        "max": 4.462
+      }
+    },
+    {
+      "name": "mfc_flow",
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 198,
+      "kind": "numeric",
+      "stats": {
+        "count": 200.0,
+        "mean": 120.66375,
+        "std": 8.34124850189417,
+        "min": 99.04,
+        "25%": 115.42,
+        "50%": 120.795,
+        "75%": 125.5375,
+        "max": 146.64
+      }
+    },
+    {
+      "name": "temperature",
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 192,
+      "kind": "numeric",
+      "stats": {
+        "count": 200.0,
+        "mean": 293.40985,
+        "std": 19.317586214724567,
+        "min": 272.97,
+        "25%": 278.765,
+        "50%": 281.94,
+        "75%": 318.90999999999997,
+        "max": 329.49
+      }
+    },
+    {
+      "name": "is_anomaly",
+      "dtype": "int64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "unique_count": 1,
+      "kind": "numeric",
+      "stats": {
+        "count": 200.0,
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.0,
+        "max": 0.0
+      }
+    }
+  ],
+  "numeric_columns": [
+    "chamber_pressure",
+    "mfc_flow",
+    "temperature",
+    "is_anomaly"
+  ],
+  "datetime_columns": [
+    "timestamp"
+  ],
+  "categorical_columns": [
+    "equipment_id",
+    "recipe"
+  ],
+  "analysis_hints": [
+    "datetime_column_detected",
+    "correlation_analysis_available",
+    "groupby_analysis_available"
+  ],
+  "data_path": "/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv",
+  "profiled_at": "2026-06-18T18:52:23.702884"
+}

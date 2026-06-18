@@ -213,3 +213,54 @@
 2026-06-18 18:47:24 | INFO | SESSION END | 2026-06-18 18:47:24 | mode=compare_batch | models=4 | elapsed=10.7s
 2026-06-18 18:47:24 | INFO | ================================================================================
 2026-06-18 18:47:24 | INFO | 
+2026-06-18 18:47:24 | INFO | SYNC OK   | commit: Update stats model comparison
+2026-06-18 18:51:54 | INFO | 
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | SESSION START | 2026-06-18 18:51:54 | mode=compare_batch | models=gemma4:31b,gemma4:26b,qwen3.6:35b,qwen3-vl:32b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | COMPARE | start model 1/4: gemma4:31b
+2026-06-18 18:51:54 | INFO | 
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | SESSION START | 2026-06-18 18:51:54 | mode=compare | model=gemma4:31b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_31b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=1/4
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:51:54 | INFO | OLLAMA   | prepare gemma4:31b (no models were running)
+2026-06-18 18:51:54 | INFO | STATS DONE | model=gemma4:31b | score=100.0%
+2026-06-18 18:51:54 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:51:54 | INFO | SESSION END | 2026-06-18 18:51:54 | model=gemma4:31b | status=ok | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_31b | validation_score=100.0% | gpu_util_avg=0.0% | elapsed=0s
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | 
+2026-06-18 18:51:54 | INFO | COMPARE | done model 1/4: gemma4:31b | status=ok | score=100.0% | elapsed=0.1s
+2026-06-18 18:51:54 | INFO | COMPARE | start model 2/4: gemma4:26b
+2026-06-18 18:51:54 | INFO | 
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | SESSION START | 2026-06-18 18:51:54 | mode=compare | model=gemma4:26b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=2/4
+2026-06-18 18:51:54 | INFO | ================================================================================
+2026-06-18 18:51:54 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:51:54 | INFO | OLLAMA   | prepare gemma4:26b (no models were running)
+2026-06-18 18:51:54 | INFO | ADK ROUND | model=gemma4:26b | round=1/8 | score=0.0%
+2026-06-18 18:52:20 | INFO | TOOL START | load_data(path='sample_sensor.csv')
+2026-06-18 18:52:21 | INFO | TOOL OK   | load_data -> {'status': 'loaded', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv', 'row_count': 200, 'column_count': 7, 'columns': ['timestamp', 'equipment_id', 'recipe', ...
+2026-06-18 18:52:22 | INFO | TOOL START | sample_rows(n=5)
+2026-06-18 18:52:22 | INFO | TOOL OK   | sample_rows -> {'row_count': 200, 'sample_count': 5, 'rows': [{'timestamp': '2026-06-01T08:00:00.000', 'equipment_id': 'EQP-A01', 'recipe': 'ALD_SiO2_001', 'chamber_pressure': None, 'mfc_flow': 119.11, 'temperatu...
+2026-06-18 18:52:23 | INFO | TOOL START | profile_data()
+2026-06-18 18:52:23 | INFO | TOOL OK   | profile_data -> {'status': 'profiled', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b/profile.json', 'row_count': 200, 'column_count': 7, 'numeric_columns': ['chamber_pressure', '...
+2026-06-18 18:52:35 | INFO | TOOL START | run_descriptive_stats(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 18:52:35 | INFO | TOOL OK   | run_descriptive_stats -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'statistics': {'chamber_pressure': {'count': 194.0, 'mean': 3.058680412371134, 'std': 0.8102524271979319, 'min': 2.113, ...
+2026-06-18 18:52:37 | INFO | TOOL START | run_correlation(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 18:52:37 | INFO | TOOL OK   | run_correlation -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'matrix': {'chamber_pressure': {'chamber_pressure': 1.0, 'mfc_flow': 0.1203, 'temperature': 0.9711}, 'mfc_flow': {'chamb...
+2026-06-18 18:52:39 | INFO | TOOL START | run_groupby_stats(agg='mean', group_by='recipe', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 18:52:39 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'recipe', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 3, 'data': [{'recipe': 'ALD_SiO2_001', 'chamber_pressure': 2.5...
+2026-06-18 18:52:41 | INFO | TOOL START | run_categorical_summary(columns=['equipment_id', 'recipe'])
+2026-06-18 18:52:41 | INFO | TOOL OK   | run_categorical_summary -> {'status': 'ok', 'columns': ['equipment_id', 'recipe'], 'summaries': {'equipment_id': {'unique_count': 2, 'top_values': {'EQP-A01': 100, 'EQP-A02': 100}}, 'recipe': {'unique_count': 3, 'top_values'...
+2026-06-18 18:52:42 | INFO | TOOL START | detect_outliers(column='chamber_pressure', method='iqr')
+2026-06-18 18:52:42 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'chamber_pressure', 'method': 'iqr', 'q1': 2.4515000000000002, 'q3': 4.094, 'iqr': 1.6425, 'lower_bound': -0.012249999999999872, 'upper_bound': 6.55775, 'outlier_count': ...
+2026-06-18 18:52:44 | INFO | TOOL START | generate_charts(histogram_columns=[])
+2026-06-18 18:52:46 | INFO | TOOL OK   | generate_charts -> {'status': 'ok', 'charts': ['charts/hist_chamber_pressure.png', 'charts/hist_mfc_flow.png', 'charts/hist_temperature.png', 'charts/correlation_heatmap.png']}
+2026-06-18 18:52:56 | INFO | TOOL START | save_analysis_report(findings=['chamber_pressure와 temperature 간의 매우 높은 양의 상관관계(0.9711)가 관찰되었습니다.', 'recipe별 평균 온도 차이가 뚜렷합니다 (PVD_TiN_010: 320.5361, ALD_SiO2_001: 279.9157, ALD_SiO2_002: 280.1827).', 'chamber_pressure 컬럼에서 3.0%의 결측치가 발견되었으나, IQR 방식에 따른 이상치는 탐지되지 않았습니다.', 'equipment_id별 데이터 분포는 EQP-A01과 EQP-A02가 각각 100건으로 균등하게 분포되어 있습니다.'], summary='본 분석은 센서 데이터(sample_sensor.csv)의 주요 수치형 변수와 범주형 변수의 특성을 진단한 결과입니다. 주요 변수인 챔버 압력, MFC 유량, 온도의 기술 통계 및 레시피별 평균값 차이를 확인하였으며, 변수 간의 상관관계와 이상치 여부를 검토하였습니다.', title='센서 데이터 통계 분석 결과 보고서')
