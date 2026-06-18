@@ -1,0 +1,326 @@
+{
+  "updated_at": "2026-06-18T19:02:02.655881",
+  "runs": [
+    {
+      "name": "descriptive_stats",
+      "ran_at": "2026-06-18T18:55:53.154631",
+      "result": {
+        "columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "statistics": {
+          "chamber_pressure": {
+            "count": 194.0,
+            "mean": 3.058680412371134,
+            "std": 0.8102524271979319,
+            "min": 2.113,
+            "25%": 2.4515000000000002,
+            "50%": 2.5975,
+            "75%": 4.094,
+            "max": 4.462
+          },
+          "mfc_flow": {
+            "count": 200.0,
+            "mean": 120.66375,
+            "std": 8.34124850189417,
+            "min": 99.04,
+            "25%": 115.42,
+            "50%": 120.795,
+            "75%": 125.5375,
+            "max": 146.64
+          },
+          "temperature": {
+            "count": 200.0,
+            "mean": 293.40985,
+            "std": 19.317586214724567,
+            "min": 272.97,
+            "25%": 278.765,
+            "50%": 281.94,
+            "75%": 318.90999999999997,
+            "max": 329.49
+          }
+        }
+      }
+    },
+    {
+      "name": "correlation",
+      "ran_at": "2026-06-18T18:55:53.159409",
+      "result": {
+        "columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "matrix": {
+          "chamber_pressure": {
+            "chamber_pressure": 1.0,
+            "mfc_flow": 0.1203,
+            "temperature": 0.9711
+          },
+          "mfc_flow": {
+            "chamber_pressure": 0.1203,
+            "mfc_flow": 1.0,
+            "temperature": 0.1334
+          },
+          "temperature": {
+            "chamber_pressure": 0.9711,
+            "mfc_flow": 0.1334,
+            "temperature": 1.0
+          }
+        }
+      }
+    },
+    {
+      "name": "groupby_stats",
+      "ran_at": "2026-06-18T18:55:53.163820",
+      "result": {
+        "group_by": "equipment_id",
+        "value_columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "agg": "mean",
+        "group_count": 2,
+        "data": [
+          {
+            "equipment_id": "EQP-A01",
+            "chamber_pressure": 3.0751,
+            "mfc_flow": 120.0034,
+            "temperature": 293.3322
+          },
+          {
+            "equipment_id": "EQP-A02",
+            "chamber_pressure": 3.0423,
+            "mfc_flow": 121.3241,
+            "temperature": 293.4875
+          }
+        ]
+      }
+    },
+    {
+      "name": "groupby_stats",
+      "ran_at": "2026-06-18T18:55:53.167425",
+      "result": {
+        "group_by": "recipe",
+        "value_columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "agg": "mean",
+        "group_count": 3,
+        "data": [
+          {
+            "recipe": "ALD_SiO2_001",
+            "chamber_pressure": 2.5052,
+            "mfc_flow": 119.6116,
+            "temperature": 279.9157
+          },
+          {
+            "recipe": "ALD_SiO2_002",
+            "chamber_pressure": 2.4965,
+            "mfc_flow": 120.1628,
+            "temperature": 280.1827
+          },
+          {
+            "recipe": "PVD_TiN_010",
+            "chamber_pressure": 4.1918,
+            "mfc_flow": 122.2403,
+            "temperature": 320.5361
+          }
+        ]
+      }
+    },
+    {
+      "name": "categorical_summary",
+      "ran_at": "2026-06-18T18:55:53.169647",
+      "result": {
+        "columns": [
+          "equipment_id",
+          "recipe"
+        ],
+        "summaries": {
+          "equipment_id": {
+            "unique_count": 2,
+            "top_values": {
+              "EQP-A01": 100,
+              "EQP-A02": 100
+            }
+          },
+          "recipe": {
+            "unique_count": 3,
+            "top_values": {
+              "ALD_SiO2_001": 67,
+              "ALD_SiO2_002": 67,
+              "PVD_TiN_010": 66
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "outliers",
+      "ran_at": "2026-06-18T18:55:53.171812",
+      "result": {
+        "column": "chamber_pressure",
+        "method": "iqr",
+        "q1": 2.4515000000000002,
+        "q3": 4.094,
+        "iqr": 1.6425,
+        "lower_bound": -0.012249999999999872,
+        "upper_bound": 6.55775,
+        "outlier_count": 0,
+        "outlier_pct": 0.0
+      }
+    },
+    {
+      "name": "outliers",
+      "ran_at": "2026-06-18T18:55:53.173858",
+      "result": {
+        "column": "mfc_flow",
+        "method": "iqr",
+        "q1": 115.42,
+        "q3": 125.5375,
+        "iqr": 10.117499999999993,
+        "lower_bound": 100.24375,
+        "upper_bound": 140.71374999999998,
+        "outlier_count": 2,
+        "outlier_pct": 1.0
+      }
+    },
+    {
+      "name": "outliers",
+      "ran_at": "2026-06-18T18:55:53.175892",
+      "result": {
+        "column": "temperature",
+        "method": "iqr",
+        "q1": 278.765,
+        "q3": 318.90999999999997,
+        "iqr": 40.14499999999998,
+        "lower_bound": 218.5475,
+        "upper_bound": 379.12749999999994,
+        "outlier_count": 0,
+        "outlier_pct": 0.0
+      }
+    },
+    {
+      "name": "descriptive_stats",
+      "ran_at": "2026-06-18T19:02:02.644034",
+      "result": {
+        "columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "statistics": {
+          "chamber_pressure": {
+            "count": 194.0,
+            "mean": 3.058680412371134,
+            "std": 0.8102524271979319,
+            "min": 2.113,
+            "25%": 2.4515000000000002,
+            "50%": 2.5975,
+            "75%": 4.094,
+            "max": 4.462
+          },
+          "mfc_flow": {
+            "count": 200.0,
+            "mean": 120.66375,
+            "std": 8.34124850189417,
+            "min": 99.04,
+            "25%": 115.42,
+            "50%": 120.795,
+            "75%": 125.5375,
+            "max": 146.64
+          },
+          "temperature": {
+            "count": 200.0,
+            "mean": 293.40985,
+            "std": 19.317586214724567,
+            "min": 272.97,
+            "25%": 278.765,
+            "50%": 281.94,
+            "75%": 318.90999999999997,
+            "max": 329.49
+          }
+        }
+      }
+    },
+    {
+      "name": "correlation",
+      "ran_at": "2026-06-18T19:02:02.648392",
+      "result": {
+        "columns": [
+          "chamber_pressure",
+          "mfc_flow",
+          "temperature"
+        ],
+        "matrix": {
+          "chamber_pressure": {
+            "chamber_pressure": 1.0,
+            "mfc_flow": 0.1203,
+            "temperature": 0.9711
+          },
+          "mfc_flow": {
+            "chamber_pressure": 0.1203,
+            "mfc_flow": 1.0,
+            "temperature": 0.1334
+          },
+          "temperature": {
+            "chamber_pressure": 0.9711,
+            "mfc_flow": 0.1334,
+            "temperature": 1.0
+          }
+        }
+      }
+    },
+    {
+      "name": "groupby_stats",
+      "ran_at": "2026-06-18T19:02:02.653081",
+      "result": {
+        "group_by": "recipe",
+        "value_columns": [
+          "mfc_flow",
+          "temperature"
+        ],
+        "agg": "mean",
+        "group_count": 3,
+        "data": [
+          {
+            "recipe": "ALD_SiO2_001",
+            "mfc_flow": 119.6116,
+            "temperature": 279.9157
+          },
+          {
+            "recipe": "ALD_SiO2_002",
+            "mfc_flow": 120.1628,
+            "temperature": 280.1827
+          },
+          {
+            "recipe": "PVD_TiN_010",
+            "mfc_flow": 122.2403,
+            "temperature": 320.5361
+          }
+        ]
+      }
+    },
+    {
+      "name": "outliers",
+      "ran_at": "2026-06-18T19:02:02.655872",
+      "result": {
+        "column": "chamber_pressure",
+        "method": "iqr",
+        "q1": 2.4515000000000002,
+        "q3": 4.094,
+        "iqr": 1.6425,
+        "lower_bound": -0.012249999999999872,
+        "upper_bound": 6.55775,
+        "outlier_count": 0,
+        "outlier_pct": 0.0
+      }
+    }
+  ]
+}

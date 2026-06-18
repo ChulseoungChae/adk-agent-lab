@@ -264,3 +264,138 @@
 2026-06-18 18:52:44 | INFO | TOOL START | generate_charts(histogram_columns=[])
 2026-06-18 18:52:46 | INFO | TOOL OK   | generate_charts -> {'status': 'ok', 'charts': ['charts/hist_chamber_pressure.png', 'charts/hist_mfc_flow.png', 'charts/hist_temperature.png', 'charts/correlation_heatmap.png']}
 2026-06-18 18:52:56 | INFO | TOOL START | save_analysis_report(findings=['chamber_pressure와 temperature 간의 매우 높은 양의 상관관계(0.9711)가 관찰되었습니다.', 'recipe별 평균 온도 차이가 뚜렷합니다 (PVD_TiN_010: 320.5361, ALD_SiO2_001: 279.9157, ALD_SiO2_002: 280.1827).', 'chamber_pressure 컬럼에서 3.0%의 결측치가 발견되었으나, IQR 방식에 따른 이상치는 탐지되지 않았습니다.', 'equipment_id별 데이터 분포는 EQP-A01과 EQP-A02가 각각 100건으로 균등하게 분포되어 있습니다.'], summary='본 분석은 센서 데이터(sample_sensor.csv)의 주요 수치형 변수와 범주형 변수의 특성을 진단한 결과입니다. 주요 변수인 챔버 압력, MFC 유량, 온도의 기술 통계 및 레시피별 평균값 차이를 확인하였으며, 변수 간의 상관관계와 이상치 여부를 검토하였습니다.', title='센서 데이터 통계 분석 결과 보고서')
+2026-06-18 18:52:56 | INFO | SYNC OK   | commit: Stats report: 센서 데이터 통계 분석 결과 보고서
+2026-06-18 18:52:58 | INFO | TOOL OK   | save_analysis_report -> {'status': 'saved', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b/report.md', 'title': '센서 데이터 통계 분석 결과 보고서', 'finding_count': 4, 'git_sync': {'synced': True, 'me...
+2026-06-18 18:53:00 | INFO | TOOL START | validate_analysis()
+2026-06-18 18:53:00 | INFO | TOOL OK   | validate_analysis -> {'status': 'validated', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b/validation.json', 'complete': True, 'score': 100.0, 'passed_checks': 9, 'total_checks': 9, '...
+2026-06-18 18:53:01 | INFO | TOOL START | read_analysis_state()
+2026-06-18 18:53:01 | INFO | TOOL OK   | read_analysis_state -> {'metadata': {'title': '센서 데이터 통계 분석 결과 보고서', 'updated_at': '2026-06-18T18:52:56.042451'}, 'profile_exists': True, 'statistics_run_count': 5, 'report_exists': True, 'validation_exists': True, 'vali...
+2026-06-18 18:53:18 | INFO | STATS DONE | model=gemma4:26b | score=100.0%
+2026-06-18 18:53:18 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:53:18 | INFO | SESSION END | 2026-06-18 18:53:18 | model=gemma4:26b | status=ok | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b | validation_score=100.0% | gpu_util_avg=15.71% | elapsed=1m 23s
+2026-06-18 18:53:18 | INFO | ================================================================================
+2026-06-18 18:53:18 | INFO | 
+2026-06-18 18:53:18 | INFO | COMPARE | done model 2/4: gemma4:26b | status=ok | score=100.0% | elapsed=83.6s
+2026-06-18 18:53:18 | INFO | COMPARE | start model 3/4: qwen3.6:35b
+2026-06-18 18:53:18 | INFO | 
+2026-06-18 18:53:18 | INFO | ================================================================================
+2026-06-18 18:53:18 | INFO | SESSION START | 2026-06-18 18:53:18 | mode=compare | model=qwen3.6:35b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=3/4
+2026-06-18 18:53:18 | INFO | ================================================================================
+2026-06-18 18:53:18 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:53:18 | INFO | OLLAMA   | unloaded ['gemma4:26b'], waiting 20.0s for VRAM
+2026-06-18 18:53:38 | INFO | ADK ROUND | model=qwen3.6:35b | round=1/8 | score=0.0%
+2026-06-18 18:54:14 | INFO | TOOL START | load_data(path='sample_sensor.csv')
+2026-06-18 18:54:14 | INFO | TOOL OK   | load_data -> {'status': 'loaded', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv', 'row_count': 200, 'column_count': 7, 'columns': ['timestamp', 'equipment_id', 'recipe', ...
+2026-06-18 18:54:14 | INFO | TOOL START | sample_rows(n=5)
+2026-06-18 18:54:14 | INFO | TOOL OK   | sample_rows -> {'row_count': 200, 'sample_count': 5, 'rows': [{'timestamp': '2026-06-01T08:00:00.000', 'equipment_id': 'EQP-A01', 'recipe': 'ALD_SiO2_001', 'chamber_pressure': None, 'mfc_flow': 119.11, 'temperatu...
+2026-06-18 18:54:25 | INFO | TOOL START | profile_data()
+2026-06-18 18:54:25 | INFO | TOOL OK   | profile_data -> {'status': 'profiled', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b/profile.json', 'row_count': 200, 'column_count': 7, 'numeric_columns': ['chamber_pressure', ...
+2026-06-18 18:55:53 | INFO | TOOL START | run_descriptive_stats(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 18:55:53 | INFO | TOOL OK   | run_descriptive_stats -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'statistics': {'chamber_pressure': {'count': 194.0, 'mean': 3.058680412371134, 'std': 0.8102524271979319, 'min': 2.113, ...
+2026-06-18 18:55:53 | INFO | TOOL START | run_correlation(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 18:55:53 | INFO | TOOL OK   | run_correlation -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'matrix': {'chamber_pressure': {'chamber_pressure': 1.0, 'mfc_flow': 0.1203, 'temperature': 0.9711}, 'mfc_flow': {'chamb...
+2026-06-18 18:55:53 | INFO | TOOL START | run_groupby_stats(group_by='equipment_id', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'], agg='mean')
+2026-06-18 18:55:53 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'equipment_id', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 2, 'data': [{'equipment_id': 'EQP-A01', 'chamber_pressur...
+2026-06-18 18:55:53 | INFO | TOOL START | run_groupby_stats(group_by='recipe', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'], agg='mean')
+2026-06-18 18:55:53 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'recipe', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 3, 'data': [{'recipe': 'ALD_SiO2_001', 'chamber_pressure': 2.5...
+2026-06-18 18:55:53 | INFO | TOOL START | run_categorical_summary(columns=['equipment_id', 'recipe'])
+2026-06-18 18:55:53 | INFO | TOOL OK   | run_categorical_summary -> {'status': 'ok', 'columns': ['equipment_id', 'recipe'], 'summaries': {'equipment_id': {'unique_count': 2, 'top_values': {'EQP-A01': 100, 'EQP-A02': 100}}, 'recipe': {'unique_count': 3, 'top_values'...
+2026-06-18 18:55:53 | INFO | TOOL START | detect_outliers(column='chamber_pressure', method='iqr')
+2026-06-18 18:55:53 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'chamber_pressure', 'method': 'iqr', 'q1': 2.4515000000000002, 'q3': 4.094, 'iqr': 1.6425, 'lower_bound': -0.012249999999999872, 'upper_bound': 6.55775, 'outlier_count': ...
+2026-06-18 18:55:53 | INFO | TOOL START | detect_outliers(column='mfc_flow', method='iqr')
+2026-06-18 18:55:53 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'mfc_flow', 'method': 'iqr', 'q1': 115.42, 'q3': 125.5375, 'iqr': 10.117499999999993, 'lower_bound': 100.24375, 'upper_bound': 140.71374999999998, 'outlier_count': 2, 'ou...
+2026-06-18 18:55:53 | INFO | TOOL START | detect_outliers(column='temperature', method='iqr')
+2026-06-18 18:55:53 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'temperature', 'method': 'iqr', 'q1': 278.765, 'q3': 318.90999999999997, 'iqr': 40.14499999999998, 'lower_bound': 218.5475, 'upper_bound': 379.12749999999994, 'outlier_co...
+2026-06-18 18:57:00 | INFO | ADK ROUND | model=qwen3.6:35b | round=2/8 | score=66.7%
+2026-06-18 18:58:03 | INFO | TOOL START | read_analysis_state()
+2026-06-18 18:58:03 | INFO | TOOL OK   | read_analysis_state -> {'metadata': {'model': 'qwen3.6:35b', 'elapsed_seconds': 1.3, 'status': 'failed', 'validation_score': 0.0, 'validation_complete': False, 'finished_at': '2026-06-18T18:47:19.648726'}, 'profile_exist...
+2026-06-18 18:59:26 | INFO | TOOL START | run_descriptive_stats(columns='')
+2026-06-18 18:59:26 | ERROR | TOOL FAIL | run_descriptive_stats -> 데이터가 로드되지 않았습니다. 먼저 load_data를 호출하세요.
+2026-06-18 18:59:26 | INFO | TOOL START | generate_charts(histogram_columns='')
+2026-06-18 18:59:26 | ERROR | TOOL FAIL | generate_charts -> 데이터가 로드되지 않았습니다. 먼저 load_data를 호출하세요.
+2026-06-18 18:59:28 | ERROR | RUN FAIL | model=qwen3.6:35b | attempt=1/2 | code=1
+2026-06-18 18:59:28 | INFO | OLLAMA   | unloaded ['qwen3.6:35b'], waiting 20.0s for VRAM
+2026-06-18 18:59:48 | INFO | OLLAMA   | prepare qwen3.6:35b (no models were running)
+2026-06-18 18:59:48 | INFO | ADK ROUND | model=qwen3.6:35b | round=1/8 | score=66.7%
+2026-06-18 19:00:38 | INFO | TOOL START | load_data(path='sample_sensor.csv')
+2026-06-18 19:00:38 | INFO | TOOL OK   | load_data -> {'status': 'loaded', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv', 'row_count': 200, 'column_count': 7, 'columns': ['timestamp', 'equipment_id', 'recipe', ...
+2026-06-18 19:00:38 | INFO | TOOL START | profile_data()
+2026-06-18 19:00:38 | INFO | TOOL OK   | profile_data -> {'status': 'profiled', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b/profile.json', 'row_count': 200, 'column_count': 7, 'numeric_columns': ['chamber_pressure', ...
+2026-06-18 19:02:02 | INFO | TOOL START | run_descriptive_stats(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 19:02:02 | INFO | TOOL OK   | run_descriptive_stats -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'statistics': {'chamber_pressure': {'count': 194.0, 'mean': 3.058680412371134, 'std': 0.8102524271979319, 'min': 2.113, ...
+2026-06-18 19:02:02 | INFO | TOOL START | run_correlation(columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 19:02:02 | INFO | TOOL OK   | run_correlation -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'matrix': {'chamber_pressure': {'chamber_pressure': 1.0, 'mfc_flow': 0.1203, 'temperature': 0.9711}, 'mfc_flow': {'chamb...
+2026-06-18 19:02:02 | INFO | TOOL START | run_groupby_stats(group_by='recipe', value_columns=['mfc_flow', 'temperature'], agg='mean')
+2026-06-18 19:02:02 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'recipe', 'value_columns': ['mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 3, 'data': [{'recipe': 'ALD_SiO2_001', 'mfc_flow': 119.6116, 'temperature': 279.91...
+2026-06-18 19:02:02 | INFO | TOOL START | detect_outliers(column='chamber_pressure', method='iqr')
+2026-06-18 19:02:02 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'chamber_pressure', 'method': 'iqr', 'q1': 2.4515000000000002, 'q3': 4.094, 'iqr': 1.6425, 'lower_bound': -0.012249999999999872, 'upper_bound': 6.55775, 'outlier_count': ...
+2026-06-18 19:02:46 | INFO | ADK ROUND | model=qwen3.6:35b | round=2/8 | score=66.7%
+2026-06-18 19:03:07 | INFO | TOOL START | read_analysis_state()
+2026-06-18 19:03:07 | INFO | TOOL OK   | read_analysis_state -> {'metadata': {'model': 'qwen3.6:35b', 'elapsed_seconds': 1.3, 'status': 'failed', 'validation_score': 0.0, 'validation_complete': False, 'finished_at': '2026-06-18T18:47:19.648726'}, 'profile_exist...
+2026-06-18 19:04:10 | INFO | TOOL START | run_descriptive_stats(columns='')
+2026-06-18 19:04:10 | ERROR | TOOL FAIL | run_descriptive_stats -> 데이터가 로드되지 않았습니다. 먼저 load_data를 호출하세요.
+2026-06-18 19:04:11 | ERROR | RUN FAIL | model=qwen3.6:35b | attempt=2/2 | code=1
+2026-06-18 19:04:11 | INFO | OLLAMA   | unloaded ['qwen3.6:35b'], waiting 20.0s for VRAM
+2026-06-18 19:04:31 | ERROR | RUN FAIL | model=qwen3.6:35b | code=1
+2026-06-18 19:04:31 | INFO | --------------------------------------------------------------------------------
+2026-06-18 19:04:31 | INFO | SESSION END | 2026-06-18 19:04:31 | model=qwen3.6:35b | status=failed | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b | validation_score=66.7% | gpu_util_avg=8.42% | elapsed=11m 13s
+2026-06-18 19:04:31 | INFO | ================================================================================
+2026-06-18 19:04:31 | INFO | 
+2026-06-18 19:04:31 | INFO | COMPARE | done model 3/4: qwen3.6:35b | status=failed | score=66.7% | elapsed=673.7s
+2026-06-18 19:04:31 | INFO | COMPARE | start model 4/4: qwen3-vl:32b
+2026-06-18 19:04:31 | INFO | 
+2026-06-18 19:04:31 | INFO | ================================================================================
+2026-06-18 19:04:31 | INFO | SESSION START | 2026-06-18 19:04:31 | mode=compare | model=qwen3-vl:32b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=4/4
+2026-06-18 19:04:31 | INFO | ================================================================================
+2026-06-18 19:04:31 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 19:04:32 | INFO | OLLAMA   | prepare qwen3-vl:32b (no models were running)
+2026-06-18 19:04:32 | INFO | ADK ROUND | model=qwen3-vl:32b | round=1/8 | score=0.0%
+2026-06-18 19:05:58 | INFO | TOOL START | load_data()
+2026-06-18 19:05:58 | INFO | TOOL OK   | load_data -> {'status': 'loaded', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv', 'row_count': 200, 'column_count': 7, 'columns': ['timestamp', 'equipment_id', 'recipe', ...
+2026-06-18 19:06:42 | INFO | TOOL START | profile_data()
+2026-06-18 19:06:42 | INFO | TOOL OK   | profile_data -> {'status': 'profiled', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b/profile.json', 'row_count': 200, 'column_count': 7, 'numeric_columns': ['chamber_pressure',...
+2026-06-18 19:14:17 | INFO | TOOL START | run_descriptive_stats(columns=['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'])
+2026-06-18 19:14:17 | INFO | TOOL OK   | run_descriptive_stats -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'], 'statistics': {'chamber_pressure': {'count': 194.0, 'mean': 3.058680412371134, 'std': 0.8102524271979319, ...
+2026-06-18 19:18:28 | INFO | TOOL START | run_correlation(columns=['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'])
+2026-06-18 19:18:28 | INFO | TOOL OK   | run_correlation -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'], 'matrix': {'chamber_pressure': {'chamber_pressure': 1.0, 'mfc_flow': 0.1203, 'temperature': 0.9711, 'is_an...
+2026-06-18 19:20:52 | INFO | TOOL START | run_groupby_stats(group_by='equipment_id', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'], agg='mean')
+2026-06-18 19:20:52 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'equipment_id', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 2, 'data': [{'equipment_id': 'EQP-A01', 'chamber_pressur...
+2026-06-18 19:23:49 | INFO | TOOL START | run_groupby_stats(group_by='recipe', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'], agg='mean')
+2026-06-18 19:23:49 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'recipe', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 3, 'data': [{'recipe': 'ALD_SiO2_001', 'chamber_pressure': 2.5...
+2026-06-18 19:26:10 | INFO | TOOL START | run_categorical_summary(columns=['equipment_id', 'recipe'])
+2026-06-18 19:26:10 | INFO | TOOL OK   | run_categorical_summary -> {'status': 'ok', 'columns': ['equipment_id', 'recipe'], 'summaries': {'equipment_id': {'unique_count': 2, 'top_values': {'EQP-A01': 100, 'EQP-A02': 100}}, 'recipe': {'unique_count': 3, 'top_values'...
+2026-06-18 19:28:56 | INFO | TOOL START | detect_outliers(column='chamber_pressure', method='iqr')
+2026-06-18 19:28:56 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'chamber_pressure', 'method': 'iqr', 'q1': 2.4515000000000002, 'q3': 4.094, 'iqr': 1.6425, 'lower_bound': -0.012249999999999872, 'upper_bound': 6.55775, 'outlier_count': ...
+2026-06-18 19:30:55 | INFO | TOOL START | generate_charts(histogram_columns=None)
+2026-06-18 19:30:56 | INFO | TOOL OK   | generate_charts -> {'status': 'ok', 'charts': ['charts/hist_chamber_pressure.png', 'charts/hist_mfc_flow.png', 'charts/hist_temperature.png', 'charts/correlation_heatmap.png']}
+2026-06-18 19:40:58 | ERROR | RUN FAIL | model=qwen3-vl:32b | attempt=1/2 | code=1
+2026-06-18 19:40:58 | INFO | OLLAMA   | unloaded ['qwen3-vl:32b'], waiting 20.0s for VRAM
+2026-06-18 19:41:18 | INFO | OLLAMA   | prepare qwen3-vl:32b (no models were running)
+2026-06-18 19:41:18 | INFO | ADK ROUND | model=qwen3-vl:32b | round=1/8 | score=77.8%
+2026-06-18 19:43:07 | INFO | TOOL START | load_data(path='sample_sensor.csv')
+2026-06-18 19:43:07 | INFO | TOOL OK   | load_data -> {'status': 'loaded', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv', 'row_count': 200, 'column_count': 7, 'columns': ['timestamp', 'equipment_id', 'recipe', ...
+2026-06-18 19:43:50 | INFO | TOOL START | profile_data()
+2026-06-18 19:43:50 | INFO | TOOL OK   | profile_data -> {'status': 'profiled', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b/profile.json', 'row_count': 200, 'column_count': 7, 'numeric_columns': ['chamber_pressure',...
+2026-06-18 19:47:59 | INFO | TOOL START | run_descriptive_stats(columns=['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'])
+2026-06-18 19:47:59 | INFO | TOOL OK   | run_descriptive_stats -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'], 'statistics': {'chamber_pressure': {'count': 194.0, 'mean': 3.058680412371134, 'std': 0.8102524271979319, ...
+2026-06-18 19:51:19 | INFO | TOOL START | run_correlation(columns=None)
+2026-06-18 19:51:19 | INFO | TOOL OK   | run_correlation -> {'status': 'ok', 'columns': ['chamber_pressure', 'mfc_flow', 'temperature', 'is_anomaly'], 'matrix': {'chamber_pressure': {'chamber_pressure': 1.0, 'mfc_flow': 0.1203, 'temperature': 0.9711, 'is_an...
+2026-06-18 19:54:56 | INFO | TOOL START | run_groupby_stats(group_by='equipment_id', value_columns=['chamber_pressure', 'mfc_flow', 'temperature'], agg='mean')
+2026-06-18 19:54:56 | INFO | TOOL OK   | run_groupby_stats -> {'status': 'ok', 'group_by': 'equipment_id', 'value_columns': ['chamber_pressure', 'mfc_flow', 'temperature'], 'agg': 'mean', 'group_count': 2, 'data': [{'equipment_id': 'EQP-A01', 'chamber_pressur...
+2026-06-18 19:57:20 | INFO | TOOL START | run_categorical_summary(columns=['equipment_id', 'recipe'])
+2026-06-18 19:57:20 | INFO | TOOL OK   | run_categorical_summary -> {'status': 'ok', 'columns': ['equipment_id', 'recipe'], 'summaries': {'equipment_id': {'unique_count': 2, 'top_values': {'EQP-A01': 100, 'EQP-A02': 100}}, 'recipe': {'unique_count': 3, 'top_values'...
+2026-06-18 19:59:17 | INFO | TOOL START | detect_outliers(column='chamber_pressure', method='iqr')
+2026-06-18 19:59:17 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'chamber_pressure', 'method': 'iqr', 'q1': 2.4515000000000002, 'q3': 4.094, 'iqr': 1.6425, 'lower_bound': -0.012249999999999872, 'upper_bound': 6.55775, 'outlier_count': ...
+2026-06-18 20:00:28 | INFO | TOOL START | detect_outliers(column='mfc_flow', method='iqr')
+2026-06-18 20:00:28 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'mfc_flow', 'method': 'iqr', 'q1': 115.42, 'q3': 125.5375, 'iqr': 10.117499999999993, 'lower_bound': 100.24375, 'upper_bound': 140.71374999999998, 'outlier_count': 2, 'ou...
+2026-06-18 20:02:22 | INFO | TOOL START | detect_outliers(column='temperature', method='iqr')
+2026-06-18 20:02:22 | INFO | TOOL OK   | detect_outliers -> {'status': 'ok', 'column': 'temperature', 'method': 'iqr', 'q1': 278.765, 'q3': 318.90999999999997, 'iqr': 40.14499999999998, 'lower_bound': 218.5475, 'upper_bound': 379.12749999999994, 'outlier_co...
+2026-06-18 20:06:53 | INFO | TOOL START | generate_charts(histogram_columns=['chamber_pressure', 'mfc_flow', 'temperature'])
+2026-06-18 20:06:54 | INFO | TOOL OK   | generate_charts -> {'status': 'ok', 'charts': ['charts/hist_chamber_pressure.png', 'charts/hist_mfc_flow.png', 'charts/hist_temperature.png', 'charts/correlation_heatmap.png']}
+2026-06-18 20:12:48 | INFO | TOOL START | save_analysis_report(title='센서 데이터 통계 분석 보고서', summary='본 보고서는 200개의 센서 데이터를 대상으로 분석한 결과입니다. timestamp 컬럼을 기반으로 시간 시리즈 특성을 확인했으며, chamber_pressure와 temperature는 0.9711의 높은 상관관계를 보였습니다. mfc_flow에서 2건의 이상치(1.0%)가 탐지되었고, is_anomaly 컬럼은 모든 값이 0으로 이상 신호가 없습니다. equipment_id별 집계 결과 EQP-A02의 mfc_flow 평균이 EQP-A01보다 높게 나타났습니다.', findings=['timestamp 컬럼을 기반으로 2026-06-01 08:00부터 2026-06-02 00:35까지 24시간 주기의 시간 시리즈 데이터입니다.', 'chamber_pressure와 temperature 간 상관관계가 0.9711로 매우 강한 양의 상관관계를 나타냅니다.', 'mfc_flow 컬럼에서 IQR 기준으로 2건(1.0%)의 이상치가 탐지되었습니다.', 'is_anomaly 컬럼은 200개 모두 0으로, 분석 기간 내 이상 신호가 존재하지 않습니다.', 'equipment_id별 집계 결과 EQP-A02의 mfc_flow 평균(121.32)이 EQP-A01(120.00)보다 1.32 높게 측정되었습니다.'])
