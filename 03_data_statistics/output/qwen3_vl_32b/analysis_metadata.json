@@ -1,0 +1,8 @@
+{
+  "model": "qwen3-vl:32b",
+  "elapsed_seconds": 4.8,
+  "status": "failed",
+  "validation_score": 0.0,
+  "validation_complete": false,
+  "finished_at": "2026-06-18T18:46:25.396982"
+}

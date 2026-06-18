@@ -41,3 +41,92 @@
 2026-06-18 18:34:25 | INFO | TOOL OK   | validate_analysis -> {'status': 'validated', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_31b/validation.json', 'complete': True, 'score': 100.0, 'passed_checks': 9, 'total_checks': 9, '...
 2026-06-18 18:34:25 | INFO | TOOL START | read_analysis_state()
 2026-06-18 18:34:25 | INFO | TOOL OK   | read_analysis_state -> {'metadata': {'title': '샘플 센서 데이터 통계 분석 (Tool 테스트)', 'updated_at': '2026-06-18T18:34:25.090380'}, 'profile_exists': True, 'statistics_run_count': 5, 'report_exists': True, 'validation_exists': True...
+2026-06-18 18:46:09 | INFO | 
+2026-06-18 18:46:09 | INFO | ================================================================================
+2026-06-18 18:46:09 | INFO | SESSION START | 2026-06-18 18:46:09 | mode=compare_batch | models=gemma4:31b,gemma4:26b,qwen3.6:35b,qwen3-vl:32b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log
+2026-06-18 18:46:09 | INFO | ================================================================================
+2026-06-18 18:46:09 | INFO | COMPARE | start model 1/4: gemma4:31b
+2026-06-18 18:46:09 | INFO | 
+2026-06-18 18:46:09 | INFO | ================================================================================
+2026-06-18 18:46:09 | INFO | SESSION START | 2026-06-18 18:46:09 | mode=compare | model=gemma4:31b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_31b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=1/4
+2026-06-18 18:46:09 | INFO | ================================================================================
+2026-06-18 18:46:09 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:46:09 | INFO | OLLAMA   | prepare gemma4:31b (no models were running)
+2026-06-18 18:46:09 | INFO | STATS DONE | model=gemma4:31b | score=100.0%
+2026-06-18 18:46:10 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:46:10 | INFO | SESSION END | 2026-06-18 18:46:10 | model=gemma4:31b | status=ok | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_31b | validation_score=100.0% | gpu_util_avg=0.0% | elapsed=0s
+2026-06-18 18:46:10 | INFO | ================================================================================
+2026-06-18 18:46:10 | INFO | 
+2026-06-18 18:46:10 | INFO | COMPARE | done model 1/4: gemma4:31b | status=ok | score=100.0% | elapsed=0.1s
+2026-06-18 18:46:10 | INFO | COMPARE | start model 2/4: gemma4:26b
+2026-06-18 18:46:10 | INFO | 
+2026-06-18 18:46:10 | INFO | ================================================================================
+2026-06-18 18:46:10 | INFO | SESSION START | 2026-06-18 18:46:10 | mode=compare | model=gemma4:26b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=2/4
+2026-06-18 18:46:10 | INFO | ================================================================================
+2026-06-18 18:46:10 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:46:10 | INFO | OLLAMA   | prepare gemma4:26b (no models were running)
+2026-06-18 18:46:10 | INFO | ADK ROUND | model=gemma4:26b | round=1/8 | score=0.0%
+2026-06-18 18:46:13 | ERROR | RUN FAIL | model=gemma4:26b | attempt=1/2 | code=1
+2026-06-18 18:46:13 | INFO | OLLAMA   | prepare gemma4:26b (no models were running)
+2026-06-18 18:46:13 | INFO | ADK ROUND | model=gemma4:26b | round=1/8 | score=0.0%
+2026-06-18 18:46:15 | ERROR | RUN FAIL | model=gemma4:26b | attempt=2/2 | code=1
+2026-06-18 18:46:15 | ERROR | RUN FAIL | model=gemma4:26b | code=1
+2026-06-18 18:46:15 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:46:15 | INFO | SESSION END | 2026-06-18 18:46:15 | model=gemma4:26b | status=failed | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b | validation_score=0.0% | gpu_util_avg=0.0% | elapsed=5s
+2026-06-18 18:46:15 | INFO | ================================================================================
+2026-06-18 18:46:15 | INFO | 
+2026-06-18 18:46:15 | INFO | COMPARE | done model 2/4: gemma4:26b | status=failed | score=0.0% | elapsed=5.7s
+2026-06-18 18:46:15 | INFO | COMPARE | start model 3/4: qwen3.6:35b
+2026-06-18 18:46:15 | INFO | 
+2026-06-18 18:46:15 | INFO | ================================================================================
+2026-06-18 18:46:15 | INFO | SESSION START | 2026-06-18 18:46:15 | mode=compare | model=qwen3.6:35b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=3/4
+2026-06-18 18:46:15 | INFO | ================================================================================
+2026-06-18 18:46:15 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:46:15 | INFO | OLLAMA   | prepare qwen3.6:35b (no models were running)
+2026-06-18 18:46:15 | INFO | ADK ROUND | model=qwen3.6:35b | round=1/8 | score=0.0%
+2026-06-18 18:46:18 | ERROR | RUN FAIL | model=qwen3.6:35b | attempt=1/2 | code=1
+2026-06-18 18:46:18 | INFO | OLLAMA   | prepare qwen3.6:35b (no models were running)
+2026-06-18 18:46:18 | INFO | ADK ROUND | model=qwen3.6:35b | round=1/8 | score=0.0%
+2026-06-18 18:46:20 | ERROR | RUN FAIL | model=qwen3.6:35b | attempt=2/2 | code=1
+2026-06-18 18:46:20 | ERROR | RUN FAIL | model=qwen3.6:35b | code=1
+2026-06-18 18:46:20 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:46:20 | INFO | SESSION END | 2026-06-18 18:46:20 | model=qwen3.6:35b | status=failed | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b | validation_score=0.0% | gpu_util_avg=0.0% | elapsed=4s
+2026-06-18 18:46:20 | INFO | ================================================================================
+2026-06-18 18:46:20 | INFO | 
+2026-06-18 18:46:20 | INFO | COMPARE | done model 3/4: qwen3.6:35b | status=failed | score=0.0% | elapsed=4.9s
+2026-06-18 18:46:20 | INFO | COMPARE | start model 4/4: qwen3-vl:32b
+2026-06-18 18:46:20 | INFO | 
+2026-06-18 18:46:20 | INFO | ================================================================================
+2026-06-18 18:46:20 | INFO | SESSION START | 2026-06-18 18:46:20 | mode=compare | model=qwen3-vl:32b | data=/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b | log=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/agent.log | progress=4/4
+2026-06-18 18:46:20 | INFO | ================================================================================
+2026-06-18 18:46:20 | INFO | PROMPT | `sample_sensor.csv` 데이터를 로드해 통계 분석을 수행하세요.
+
+요구사항:
+- load_data → profile_data → 적절한 통계 Tool들 → generate_charts → save_ana...
+2026-06-18 18:46:20 | INFO | OLLAMA   | prepare qwen3-vl:32b (no models were running)
+2026-06-18 18:46:20 | INFO | ADK ROUND | model=qwen3-vl:32b | round=1/8 | score=0.0%
+2026-06-18 18:46:22 | ERROR | RUN FAIL | model=qwen3-vl:32b | attempt=1/2 | code=1
+2026-06-18 18:46:23 | INFO | OLLAMA   | prepare qwen3-vl:32b (no models were running)
+2026-06-18 18:46:23 | INFO | ADK ROUND | model=qwen3-vl:32b | round=1/8 | score=0.0%
+2026-06-18 18:46:25 | ERROR | RUN FAIL | model=qwen3-vl:32b | attempt=2/2 | code=1
+2026-06-18 18:46:25 | ERROR | RUN FAIL | model=qwen3-vl:32b | code=1
+2026-06-18 18:46:25 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:46:25 | INFO | SESSION END | 2026-06-18 18:46:25 | model=qwen3-vl:32b | status=failed | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b | validation_score=0.0% | gpu_util_avg=0.0% | elapsed=4s
+2026-06-18 18:46:25 | INFO | ================================================================================
+2026-06-18 18:46:25 | INFO | 
+2026-06-18 18:46:25 | INFO | COMPARE | done model 4/4: qwen3-vl:32b | status=failed | score=0.0% | elapsed=4.8s
+2026-06-18 18:46:25 | INFO | SUMMARY  | saved /data1/github_cschae/adk-agent-lab/03_data_statistics/output/comparison_summary.json
+2026-06-18 18:46:25 | INFO | REPORT   | saved /data1/github_cschae/adk-agent-lab/03_data_statistics/output/README.md
+2026-06-18 18:46:25 | INFO | --------------------------------------------------------------------------------
+2026-06-18 18:46:25 | INFO | SESSION END | 2026-06-18 18:46:25 | mode=compare_batch | models=4 | elapsed=15.7s
+2026-06-18 18:46:25 | INFO | ================================================================================
+2026-06-18 18:46:25 | INFO | 

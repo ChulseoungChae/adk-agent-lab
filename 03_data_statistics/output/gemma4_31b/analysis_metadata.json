@@ -1,4 +1,10 @@
 {
   "title": "샘플 센서 데이터 통계 분석 (Tool 테스트)",
-  "updated_at": "2026-06-18T18:34:25.090380"
+  "updated_at": "2026-06-18T18:34:25.090380",
+  "model": "gemma4:31b",
+  "elapsed_seconds": 0.1,
+  "status": "ok",
+  "validation_score": 100.0,
+  "validation_complete": true,
+  "finished_at": "2026-06-18T18:46:10.023802"
 }
