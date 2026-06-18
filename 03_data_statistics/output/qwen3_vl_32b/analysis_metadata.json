@@ -1,4 +1,10 @@
 {
   "title": "센서 데이터 통계 분석 보고서",
-  "updated_at": "2026-06-18T20:12:48.504069"
+  "updated_at": "2026-06-18T20:12:48.504069",
+  "model": "qwen3-vl:32b",
+  "elapsed_seconds": 4164.7,
+  "status": "failed",
+  "validation_score": 100.0,
+  "validation_complete": true,
+  "finished_at": "2026-06-18T20:13:56.683042"
 }

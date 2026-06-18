@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T18:47:24.484991",
+  "updated_at": "2026-06-18T20:13:56.684499",
   "models": [
     {
       "model": "gemma4:31b",
@@ -90,11 +90,11 @@
           ]
         }
       },
-      "finished_at": "2026-06-18T18:47:14.162690",
+      "finished_at": "2026-06-18T18:51:54.753549",
       "gpu_stats": {
         "model": "gemma4:31b",
-        "started_at": "2026-06-18 18:47:14",
-        "finished_at": "2026-06-18 18:47:14",
+        "started_at": "2026-06-18 18:51:54",
+        "finished_at": "2026-06-18 18:51:54",
         "interval_sec": 5.0,
         "sample_count": 1,
         "gpu_count": 4,
@@ -123,9 +123,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 18.27,
-                "max": 18.27,
-                "avg": 18.27
+                "min": 18.21,
+                "max": 18.21,
+                "avg": 18.21
               }
             }
           },
@@ -153,9 +153,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 22.19,
-                "max": 22.19,
-                "avg": 22.19
+                "min": 22.45,
+                "max": 22.45,
+                "avg": 22.45
               }
             }
           },
@@ -183,9 +183,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 16.78,
-                "max": 16.78,
-                "avg": 16.78
+                "min": 16.7,
+                "max": 16.7,
+                "avg": 16.7
               }
             }
           },
@@ -213,9 +213,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 28.5,
-                "max": 28.5,
-                "avg": 28.5
+                "min": 28.44,
+                "max": 28.44,
+                "avg": 28.44
               }
             }
           }
@@ -232,9 +232,9 @@
             "avg": 18439.0
           },
           "total_power_w": {
-            "min": 85.74,
-            "max": 85.74,
-            "avg": 85.74
+            "min": 85.8,
+            "max": 85.8,
+            "avg": 85.8
           }
         }
       }
@@ -243,85 +243,98 @@
       "model": "gemma4:26b",
       "slug": "gemma4_26b",
       "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b",
-      "title": "",
-      "elapsed_seconds": 4.1,
-      "status": "failed",
-      "validation_score": 0.0,
-      "validation_complete": false,
-      "statistics_run_count": 0,
-      "findings_count": 0,
-      "chart_count": 0,
+      "title": "센서 데이터 통계 분석 결과 보고서",
+      "elapsed_seconds": 83.6,
+      "status": "ok",
+      "validation_score": 100.0,
+      "validation_complete": true,
+      "statistics_run_count": 5,
+      "findings_count": 4,
+      "chart_count": 4,
       "validation": {
-        "complete": false,
-        "score": 0.0,
-        "passed_checks": 0,
-        "total_checks": 5,
+        "complete": true,
+        "score": 100.0,
+        "passed_checks": 9,
+        "total_checks": 9,
         "checks": [
           {
             "name": "profile_exists",
-            "passed": false,
+            "passed": true,
             "detail": "profile.json 존재",
             "required": true
           },
           {
             "name": "descriptive_stats",
-            "passed": false,
+            "passed": true,
             "detail": "run_descriptive_stats 실행 필요",
             "required": true
           },
           {
+            "name": "correlation",
+            "passed": true,
+            "detail": "상관 분석(correlation) 미실행",
+            "required": true
+          },
+          {
+            "name": "groupby_stats",
+            "passed": true,
+            "detail": "그룹별 집계(groupby_stats) 미실행",
+            "required": true
+          },
+          {
+            "name": "categorical_summary",
+            "passed": true,
+            "detail": "범주형 요약(categorical_summary) 미실행",
+            "required": true
+          },
+          {
+            "name": "outliers",
+            "passed": true,
+            "detail": "이상치 탐지(outliers) 미실행",
+            "required": true
+          },
+          {
             "name": "charts",
-            "passed": false,
-            "detail": "차트 없음 (현재 0개)",
+            "passed": true,
+            "detail": "차트 없음 (현재 4개)",
             "required": true
           },
           {
             "name": "report_exists",
-            "passed": false,
+            "passed": true,
             "detail": "report.md 없음",
             "required": true
           },
           {
             "name": "findings_count",
-            "passed": false,
-            "detail": "주요 발견 3개 이상 필요 (현재 0개)",
+            "passed": true,
+            "detail": "주요 발견 3개 이상 필요 (현재 4개)",
             "required": true
           }
         ],
-        "missing_analyses": [
-          "descriptive_stats"
-        ],
-        "issues": [
-          "profile.json 존재",
-          "run_descriptive_stats 실행 필요",
-          "차트 없음 (현재 0개)",
-          "report.md 없음",
-          "주요 발견 3개 이상 필요 (현재 0개)"
-        ],
-        "recommendations": [
-          "profile_exists: profile.json 존재",
-          "descriptive_stats: run_descriptive_stats 실행 필요",
-          "charts: 차트 없음 (현재 0개)",
-          "report_exists: report.md 없음",
-          "findings_count: 주요 발견 3개 이상 필요 (현재 0개)",
-          "run_descriptive_stats를 먼저 실행하세요.",
-          "generate_charts로 시각화를 저장하세요.",
-          "save_analysis_report의 findings를 Tool 결과 기반으로 3개 이상 작성하세요."
-        ],
+        "missing_analyses": [],
+        "issues": [],
+        "recommendations": [],
         "metrics": {
-          "statistics_run_count": 0,
-          "chart_count": 0,
-          "findings_count": 0,
-          "run_names": []
+          "statistics_run_count": 5,
+          "chart_count": 4,
+          "findings_count": 4,
+          "run_names": [
+            "categorical_summary",
+            "correlation",
+            "descriptive_stats",
+            "groupby_stats",
+            "outliers"
+          ]
         }
       },
-      "finished_at": "2026-06-18T18:47:18.310952",
+      "finished_at": "2026-06-18T18:53:18.326866",
       "gpu_stats": {
         "model": "gemma4:26b",
-        "started_at": "2026-06-18 18:47:14",
-        "finished_at": "2026-06-18 18:47:18",
+        "started_at": "2026-06-18 18:51:54",
+        "finished_at": "2026-06-18 18:53:18",
         "interval_sec": 5.0,
-        "sample_count": 1,
+        "sample_count": 17,
         "gpu_count": 4,
         "per_gpu": {
           "0": {
@@ -344,13 +357,13 @@
               },
               "temp_c": {
                 "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "max": 25.0,
+                "avg": 24.35
               },
               "power_w": {
-                "min": 18.27,
-                "max": 18.27,
-                "avg": 18.27
+                "min": 18.0,
+                "max": 18.4,
+                "avg": 18.23
               }
             }
           },
@@ -374,13 +387,13 @@
               },
               "temp_c": {
                 "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "max": 25.0,
+                "avg": 24.41
               },
               "power_w": {
-                "min": 22.19,
-                "max": 22.19,
-                "avg": 22.19
+                "min": 21.7,
+                "max": 22.87,
+                "avg": 22.27
               }
             }
           },
@@ -408,9 +421,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 16.78,
-                "max": 16.78,
-                "avg": 16.78
+                "min": 16.25,
+                "max": 17.09,
+                "avg": 16.6
               }
             }
           },
@@ -419,28 +432,28 @@
             "metrics": {
               "util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 42.0,
+                "avg": 15.71
               },
               "mem_util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 13.0,
+                "avg": 7.82
               },
               "mem_used_mb": {
                 "min": 6794.0,
-                "max": 6794.0,
-                "avg": 6794.0
+                "max": 24109.0,
+                "avg": 22068.53
               },
               "temp_c": {
                 "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "max": 28.0,
+                "avg": 26.88
               },
               "power_w": {
-                "min": 28.5,
-                "max": 28.5,
-                "avg": 28.5
+                "min": 28.44,
+                "max": 128.24,
+                "avg": 90.28
               }
             }
           }
@@ -448,18 +461,18 @@
         "aggregate": {
           "total_gpu_util_pct": {
             "min": 0.0,
-            "max": 0.0,
-            "avg": 0.0
+            "max": 42.0,
+            "avg": 15.71
           },
           "total_mem_used_mb": {
             "min": 18439.0,
-            "max": 18439.0,
-            "avg": 18439.0
+            "max": 35754.0,
+            "avg": 33713.53
           },
           "total_power_w": {
-            "min": 85.74,
-            "max": 85.74,
-            "avg": 85.74
+            "min": 85.8,
+            "max": 185.94,
+            "avg": 147.38
           }
         }
       }
@@ -469,29 +482,53 @@
       "slug": "qwen3_6_35b",
       "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b",
       "title": "",
-      "elapsed_seconds": 1.3,
+      "elapsed_seconds": 673.7,
       "status": "failed",
-      "validation_score": 0.0,
+      "validation_score": 66.7,
       "validation_complete": false,
-      "statistics_run_count": 0,
+      "statistics_run_count": 5,
       "findings_count": 0,
       "chart_count": 0,
       "validation": {
         "complete": false,
-        "score": 0.0,
-        "passed_checks": 0,
-        "total_checks": 5,
+        "score": 66.7,
+        "passed_checks": 6,
+        "total_checks": 9,
         "checks": [
           {
             "name": "profile_exists",
-            "passed": false,
+            "passed": true,
             "detail": "profile.json 존재",
             "required": true
           },
           {
             "name": "descriptive_stats",
-            "passed": false,
+            "passed": true,
             "detail": "run_descriptive_stats 실행 필요",
+            "required": true
+          },
+          {
+            "name": "correlation",
+            "passed": true,
+            "detail": "상관 분석(correlation) 미실행",
+            "required": true
+          },
+          {
+            "name": "groupby_stats",
+            "passed": true,
+            "detail": "그룹별 집계(groupby_stats) 미실행",
+            "required": true
+          },
+          {
+            "name": "categorical_summary",
+            "passed": true,
+            "detail": "범주형 요약(categorical_summary) 미실행",
+            "required": true
+          },
+          {
+            "name": "outliers",
+            "passed": true,
+            "detail": "이상치 탐지(outliers) 미실행",
             "required": true
           },
           {
@@ -513,40 +550,39 @@
             "required": true
           }
         ],
-        "missing_analyses": [
-          "descriptive_stats"
-        ],
+        "missing_analyses": [],
         "issues": [
-          "profile.json 존재",
-          "run_descriptive_stats 실행 필요",
           "차트 없음 (현재 0개)",
           "report.md 없음",
           "주요 발견 3개 이상 필요 (현재 0개)"
         ],
         "recommendations": [
-          "profile_exists: profile.json 존재",
-          "descriptive_stats: run_descriptive_stats 실행 필요",
           "charts: 차트 없음 (현재 0개)",
           "report_exists: report.md 없음",
           "findings_count: 주요 발견 3개 이상 필요 (현재 0개)",
-          "run_descriptive_stats를 먼저 실행하세요.",
           "generate_charts로 시각화를 저장하세요.",
           "save_analysis_report의 findings를 Tool 결과 기반으로 3개 이상 작성하세요."
         ],
         "metrics": {
-          "statistics_run_count": 0,
+          "statistics_run_count": 5,
           "chart_count": 0,
           "findings_count": 0,
-          "run_names": []
+          "run_names": [
+            "categorical_summary",
+            "correlation",
+            "descriptive_stats",
+            "groupby_stats",
+            "outliers"
+          ]
         }
       },
-      "finished_at": "2026-06-18T18:47:19.648839",
+      "finished_at": "2026-06-18T19:04:31.982583",
       "gpu_stats": {
         "model": "qwen3.6:35b",
-        "started_at": "2026-06-18 18:47:18",
-        "finished_at": "2026-06-18 18:47:19",
+        "started_at": "2026-06-18 18:53:18",
+        "finished_at": "2026-06-18 19:04:31",
         "interval_sec": 5.0,
-        "sample_count": 1,
+        "sample_count": 133,
         "gpu_count": 4,
         "per_gpu": {
           "0": {
@@ -568,14 +604,14 @@
                 "avg": 4047.0
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
               },
               "power_w": {
-                "min": 18.14,
-                "max": 18.14,
-                "avg": 18.14
+                "min": 18.1,
+                "max": 19.13,
+                "avg": 18.53
               }
             }
           },
@@ -598,14 +634,14 @@
                 "avg": 4041.0
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
               },
               "power_w": {
-                "min": 22.38,
-                "max": 22.38,
-                "avg": 22.38
+                "min": 21.3,
+                "max": 23.75,
+                "avg": 22.58
               }
             }
           },
@@ -629,13 +665,13 @@
               },
               "temp_c": {
                 "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "max": 25.0,
+                "avg": 24.95
               },
               "power_w": {
-                "min": 17.03,
-                "max": 17.03,
-                "avg": 17.03
+                "min": 15.42,
+                "max": 17.28,
+                "avg": 16.49
               }
             }
           },
@@ -644,28 +680,28 @@
             "metrics": {
               "util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 65.0,
+                "avg": 8.42
               },
               "mem_util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 13.0,
+                "avg": 1.77
               },
               "mem_used_mb": {
-                "min": 6794.0,
-                "max": 6794.0,
-                "avg": 6794.0
+                "min": 6786.0,
+                "max": 24109.0,
+                "avg": 21644.55
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 34.0,
+                "avg": 26.75
               },
               "power_w": {
-                "min": 28.48,
-                "max": 28.48,
-                "avg": 28.48
+                "min": 28.4,
+                "max": 100.7,
+                "avg": 76.39
               }
             }
           }
@@ -673,18 +709,18 @@
         "aggregate": {
           "total_gpu_util_pct": {
             "min": 0.0,
-            "max": 0.0,
-            "avg": 0.0
+            "max": 65.0,
+            "avg": 8.42
           },
           "total_mem_used_mb": {
-            "min": 18439.0,
-            "max": 18439.0,
-            "avg": 18439.0
+            "min": 18431.0,
+            "max": 35754.0,
+            "avg": 33289.55
           },
           "total_power_w": {
-            "min": 86.03,
-            "max": 86.03,
-            "avg": 86.03
+            "min": 84.4,
+            "max": 157.54,
+            "avg": 133.98
           }
         }
       }
@@ -693,85 +729,98 @@
       "model": "qwen3-vl:32b",
       "slug": "qwen3_vl_32b",
       "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b",
-      "title": "",
-      "elapsed_seconds": 4.8,
+      "title": "센서 데이터 통계 분석 보고서",
+      "elapsed_seconds": 4164.7,
       "status": "failed",
-      "validation_score": 0.0,
-      "validation_complete": false,
-      "statistics_run_count": 0,
-      "findings_count": 0,
-      "chart_count": 0,
+      "validation_score": 100.0,
+      "validation_complete": true,
+      "statistics_run_count": 5,
+      "findings_count": 5,
+      "chart_count": 4,
       "validation": {
-        "complete": false,
-        "score": 0.0,
-        "passed_checks": 0,
-        "total_checks": 5,
+        "complete": true,
+        "score": 100.0,
+        "passed_checks": 9,
+        "total_checks": 9,
         "checks": [
           {
             "name": "profile_exists",
-            "passed": false,
+            "passed": true,
             "detail": "profile.json 존재",
             "required": true
           },
           {
             "name": "descriptive_stats",
-            "passed": false,
+            "passed": true,
             "detail": "run_descriptive_stats 실행 필요",
             "required": true
           },
           {
+            "name": "correlation",
+            "passed": true,
+            "detail": "상관 분석(correlation) 미실행",
+            "required": true
+          },
+          {
+            "name": "groupby_stats",
+            "passed": true,
+            "detail": "그룹별 집계(groupby_stats) 미실행",
+            "required": true
+          },
+          {
+            "name": "categorical_summary",
+            "passed": true,
+            "detail": "범주형 요약(categorical_summary) 미실행",
+            "required": true
+          },
+          {
+            "name": "outliers",
+            "passed": true,
+            "detail": "이상치 탐지(outliers) 미실행",
+            "required": true
+          },
+          {
             "name": "charts",
-            "passed": false,
-            "detail": "차트 없음 (현재 0개)",
+            "passed": true,
+            "detail": "차트 없음 (현재 4개)",
             "required": true
           },
           {
             "name": "report_exists",
-            "passed": false,
+            "passed": true,
             "detail": "report.md 없음",
             "required": true
           },
           {
             "name": "findings_count",
-            "passed": false,
-            "detail": "주요 발견 3개 이상 필요 (현재 0개)",
+            "passed": true,
+            "detail": "주요 발견 3개 이상 필요 (현재 5개)",
             "required": true
           }
         ],
-        "missing_analyses": [
-          "descriptive_stats"
-        ],
-        "issues": [
-          "profile.json 존재",
-          "run_descriptive_stats 실행 필요",
-          "차트 없음 (현재 0개)",
-          "report.md 없음",
-          "주요 발견 3개 이상 필요 (현재 0개)"
-        ],
-        "recommendations": [
-          "profile_exists: profile.json 존재",
-          "descriptive_stats: run_descriptive_stats 실행 필요",
-          "charts: 차트 없음 (현재 0개)",
-          "report_exists: report.md 없음",
-          "findings_count: 주요 발견 3개 이상 필요 (현재 0개)",
-          "run_descriptive_stats를 먼저 실행하세요.",
-          "generate_charts로 시각화를 저장하세요.",
-          "save_analysis_report의 findings를 Tool 결과 기반으로 3개 이상 작성하세요."
-        ],
+        "missing_analyses": [],
+        "issues": [],
+        "recommendations": [],
         "metrics": {
-          "statistics_run_count": 0,
-          "chart_count": 0,
-          "findings_count": 0,
-          "run_names": []
+          "statistics_run_count": 5,
+          "chart_count": 4,
+          "findings_count": 5,
+          "run_names": [
+            "categorical_summary",
+            "correlation",
+            "descriptive_stats",
+            "groupby_stats",
+            "outliers"
+          ]
         }
       },
-      "finished_at": "2026-06-18T18:47:24.484871",
+      "finished_at": "2026-06-18T20:13:56.683251",
       "gpu_stats": {
         "model": "qwen3-vl:32b",
-        "started_at": "2026-06-18 18:47:19",
-        "finished_at": "2026-06-18 18:47:24",
+        "started_at": "2026-06-18 19:04:31",
+        "finished_at": "2026-06-18 20:13:56",
         "interval_sec": 5.0,
-        "sample_count": 1,
+        "sample_count": 819,
         "gpu_count": 4,
         "per_gpu": {
           "0": {
@@ -793,14 +842,14 @@
                 "avg": 4047.0
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
               },
               "power_w": {
-                "min": 18.16,
-                "max": 18.16,
-                "avg": 18.16
+                "min": 17.94,
+                "max": 18.85,
+                "avg": 18.39
               }
             }
           },
@@ -823,14 +872,14 @@
                 "avg": 4041.0
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
               },
               "power_w": {
-                "min": 22.48,
-                "max": 22.48,
-                "avg": 22.48
+                "min": 20.87,
+                "max": 24.01,
+                "avg": 22.27
               }
             }
           },
@@ -853,14 +902,14 @@
                 "avg": 3557.0
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 25.0,
+                "avg": 25.0
               },
               "power_w": {
-                "min": 16.96,
-                "max": 16.96,
-                "avg": 16.96
+                "min": 15.8,
+                "max": 17.99,
+                "avg": 16.86
               }
             }
           },
@@ -869,28 +918,28 @@
             "metrics": {
               "util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 81.0,
+                "avg": 4.23
               },
               "mem_util_pct": {
                 "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
+                "max": 26.0,
+                "avg": 3.71
               },
               "mem_used_mb": {
-                "min": 6794.0,
-                "max": 6794.0,
-                "avg": 6794.0
+                "min": 6786.0,
+                "max": 23824.0,
+                "avg": 23678.79
               },
               "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
+                "min": 25.0,
+                "max": 31.0,
+                "avg": 27.24
               },
               "power_w": {
-                "min": 28.48,
-                "max": 28.48,
-                "avg": 28.48
+                "min": 28.3,
+                "max": 141.75,
+                "avg": 82.11
               }
             }
           }
@@ -898,18 +947,18 @@
         "aggregate": {
           "total_gpu_util_pct": {
             "min": 0.0,
-            "max": 0.0,
-            "avg": 0.0
+            "max": 81.0,
+            "avg": 4.23
           },
           "total_mem_used_mb": {
-            "min": 18439.0,
-            "max": 18439.0,
-            "avg": 18439.0
+            "min": 18431.0,
+            "max": 35469.0,
+            "avg": 35323.79
           },
           "total_power_w": {
-            "min": 86.08,
-            "max": 86.08,
-            "avg": 86.08
+            "min": 85.37,
+            "max": 198.86,
+            "avg": 139.63
           }
         }
       }

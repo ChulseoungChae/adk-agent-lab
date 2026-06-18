@@ -399,3 +399,17 @@
 2026-06-18 20:06:53 | INFO | TOOL START | generate_charts(histogram_columns=['chamber_pressure', 'mfc_flow', 'temperature'])
 2026-06-18 20:06:54 | INFO | TOOL OK   | generate_charts -> {'status': 'ok', 'charts': ['charts/hist_chamber_pressure.png', 'charts/hist_mfc_flow.png', 'charts/hist_temperature.png', 'charts/correlation_heatmap.png']}
 2026-06-18 20:12:48 | INFO | TOOL START | save_analysis_report(title='센서 데이터 통계 분석 보고서', summary='본 보고서는 200개의 센서 데이터를 대상으로 분석한 결과입니다. timestamp 컬럼을 기반으로 시간 시리즈 특성을 확인했으며, chamber_pressure와 temperature는 0.9711의 높은 상관관계를 보였습니다. mfc_flow에서 2건의 이상치(1.0%)가 탐지되었고, is_anomaly 컬럼은 모든 값이 0으로 이상 신호가 없습니다. equipment_id별 집계 결과 EQP-A02의 mfc_flow 평균이 EQP-A01보다 높게 나타났습니다.', findings=['timestamp 컬럼을 기반으로 2026-06-01 08:00부터 2026-06-02 00:35까지 24시간 주기의 시간 시리즈 데이터입니다.', 'chamber_pressure와 temperature 간 상관관계가 0.9711로 매우 강한 양의 상관관계를 나타냅니다.', 'mfc_flow 컬럼에서 IQR 기준으로 2건(1.0%)의 이상치가 탐지되었습니다.', 'is_anomaly 컬럼은 200개 모두 0으로, 분석 기간 내 이상 신호가 존재하지 않습니다.', 'equipment_id별 집계 결과 EQP-A02의 mfc_flow 평균(121.32)이 EQP-A01(120.00)보다 1.32 높게 측정되었습니다.'])
+2026-06-18 20:12:48 | INFO | SYNC OK   | commit: Stats report: 센서 데이터 통계 분석 보고서
+2026-06-18 20:12:51 | INFO | TOOL OK   | save_analysis_report -> {'status': 'saved', 'path': '/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b/report.md', 'title': '센서 데이터 통계 분석 보고서', 'finding_count': 5, 'git_sync': {'synced': True, 'mes...
+2026-06-18 20:13:56 | INFO | STATS DONE | model=qwen3-vl:32b | score=100.0%
+2026-06-18 20:13:56 | INFO | --------------------------------------------------------------------------------
+2026-06-18 20:13:56 | INFO | SESSION END | 2026-06-18 20:13:56 | model=qwen3-vl:32b | status=failed | output=/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_vl_32b | validation_score=100.0% | gpu_util_avg=4.23% | elapsed=1h 9m 24s
+2026-06-18 20:13:56 | INFO | ================================================================================
+2026-06-18 20:13:56 | INFO | 
+2026-06-18 20:13:56 | INFO | COMPARE | done model 4/4: qwen3-vl:32b | status=failed | score=100.0% | elapsed=4164.7s
+2026-06-18 20:13:56 | INFO | SUMMARY  | saved /data1/github_cschae/adk-agent-lab/03_data_statistics/output/comparison_summary.json
+2026-06-18 20:13:57 | INFO | REPORT   | saved /data1/github_cschae/adk-agent-lab/03_data_statistics/output/README.md
+2026-06-18 20:13:57 | INFO | --------------------------------------------------------------------------------
+2026-06-18 20:13:57 | INFO | SESSION END | 2026-06-18 20:13:57 | mode=compare_batch | models=4 | elapsed=4922.5s
+2026-06-18 20:13:57 | INFO | ================================================================================
+2026-06-18 20:13:57 | INFO | 
