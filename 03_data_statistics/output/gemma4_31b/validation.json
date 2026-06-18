@@ -1,0 +1,77 @@
+{
+  "complete": true,
+  "score": 100.0,
+  "passed_checks": 9,
+  "total_checks": 9,
+  "checks": [
+    {
+      "name": "profile_exists",
+      "passed": true,
+      "detail": "profile.json 존재",
+      "required": true
+    },
+    {
+      "name": "descriptive_stats",
+      "passed": true,
+      "detail": "run_descriptive_stats 실행 필요",
+      "required": true
+    },
+    {
+      "name": "correlation",
+      "passed": true,
+      "detail": "상관 분석(correlation) 미실행",
+      "required": true
+    },
+    {
+      "name": "groupby_stats",
+      "passed": true,
+      "detail": "그룹별 집계(groupby_stats) 미실행",
+      "required": true
+    },
+    {
+      "name": "categorical_summary",
+      "passed": true,
+      "detail": "범주형 요약(categorical_summary) 미실행",
+      "required": true
+    },
+    {
+      "name": "outliers",
+      "passed": true,
+      "detail": "이상치 탐지(outliers) 미실행",
+      "required": true
+    },
+    {
+      "name": "charts",
+      "passed": true,
+      "detail": "차트 없음 (현재 4개)",
+      "required": true
+    },
+    {
+      "name": "report_exists",
+      "passed": true,
+      "detail": "report.md 없음",
+      "required": true
+    },
+    {
+      "name": "findings_count",
+      "passed": true,
+      "detail": "주요 발견 3개 이상 필요 (현재 3개)",
+      "required": true
+    }
+  ],
+  "missing_analyses": [],
+  "issues": [],
+  "recommendations": [],
+  "metrics": {
+    "statistics_run_count": 5,
+    "chart_count": 4,
+    "findings_count": 3,
+    "run_names": [
+      "categorical_summary",
+      "correlation",
+      "descriptive_stats",
+      "groupby_stats",
+      "outliers"
+    ]
+  }
+}
