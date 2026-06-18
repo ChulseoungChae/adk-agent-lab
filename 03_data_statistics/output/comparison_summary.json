@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T18:46:25.397185",
+  "updated_at": "2026-06-18T18:47:24.484991",
   "models": [
     {
       "model": "gemma4:31b",
@@ -90,11 +90,11 @@
           ]
         }
       },
-      "finished_at": "2026-06-18T18:46:10.024049",
+      "finished_at": "2026-06-18T18:47:14.162690",
       "gpu_stats": {
         "model": "gemma4:31b",
-        "started_at": "2026-06-18 18:46:09",
-        "finished_at": "2026-06-18 18:46:10",
+        "started_at": "2026-06-18 18:47:14",
+        "finished_at": "2026-06-18 18:47:14",
         "interval_sec": 5.0,
         "sample_count": 1,
         "gpu_count": 4,
@@ -123,9 +123,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 18.28,
-                "max": 18.28,
-                "avg": 18.28
+                "min": 18.27,
+                "max": 18.27,
+                "avg": 18.27
               }
             }
           },
@@ -153,9 +153,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 21.64,
-                "max": 21.64,
-                "avg": 21.64
+                "min": 22.19,
+                "max": 22.19,
+                "avg": 22.19
               }
             }
           },
@@ -183,9 +183,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 16.75,
-                "max": 16.75,
-                "avg": 16.75
+                "min": 16.78,
+                "max": 16.78,
+                "avg": 16.78
               }
             }
           },
@@ -213,9 +213,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 28.57,
-                "max": 28.57,
-                "avg": 28.57
+                "min": 28.5,
+                "max": 28.5,
+                "avg": 28.5
               }
             }
           }
@@ -232,9 +232,9 @@
             "avg": 18439.0
           },
           "total_power_w": {
-            "min": 85.24,
-            "max": 85.24,
-            "avg": 85.24
+            "min": 85.74,
+            "max": 85.74,
+            "avg": 85.74
           }
         }
       }
@@ -244,7 +244,7 @@
       "slug": "gemma4_26b",
       "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/gemma4_26b",
       "title": "",
-      "elapsed_seconds": 5.7,
+      "elapsed_seconds": 4.1,
       "status": "failed",
       "validation_score": 0.0,
       "validation_complete": false,
@@ -315,236 +315,11 @@
           "run_names": []
         }
       },
-      "finished_at": "2026-06-18T18:46:15.747366",
+      "finished_at": "2026-06-18T18:47:18.310952",
       "gpu_stats": {
         "model": "gemma4:26b",
-        "started_at": "2026-06-18 18:46:10",
-        "finished_at": "2026-06-18 18:46:15",
-        "interval_sec": 5.0,
-        "sample_count": 2,
-        "gpu_count": 4,
-        "per_gpu": {
-          "0": {
-            "gpu_name": "GPU 0",
-            "metrics": {
-              "util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_used_mb": {
-                "min": 4047.0,
-                "max": 4047.0,
-                "avg": 4047.0
-              },
-              "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
-              },
-              "power_w": {
-                "min": 18.1,
-                "max": 18.28,
-                "avg": 18.19
-              }
-            }
-          },
-          "1": {
-            "gpu_name": "GPU 1",
-            "metrics": {
-              "util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_used_mb": {
-                "min": 4041.0,
-                "max": 4041.0,
-                "avg": 4041.0
-              },
-              "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
-              },
-              "power_w": {
-                "min": 21.36,
-                "max": 21.67,
-                "avg": 21.52
-              }
-            }
-          },
-          "2": {
-            "gpu_name": "GPU 2",
-            "metrics": {
-              "util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_used_mb": {
-                "min": 3557.0,
-                "max": 3557.0,
-                "avg": 3557.0
-              },
-              "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
-              },
-              "power_w": {
-                "min": 16.85,
-                "max": 17.05,
-                "avg": 16.95
-              }
-            }
-          },
-          "3": {
-            "gpu_name": "GPU 3",
-            "metrics": {
-              "util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_util_pct": {
-                "min": 0.0,
-                "max": 0.0,
-                "avg": 0.0
-              },
-              "mem_used_mb": {
-                "min": 6794.0,
-                "max": 6794.0,
-                "avg": 6794.0
-              },
-              "temp_c": {
-                "min": 24.0,
-                "max": 24.0,
-                "avg": 24.0
-              },
-              "power_w": {
-                "min": 28.55,
-                "max": 28.56,
-                "avg": 28.55
-              }
-            }
-          }
-        },
-        "aggregate": {
-          "total_gpu_util_pct": {
-            "min": 0.0,
-            "max": 0.0,
-            "avg": 0.0
-          },
-          "total_mem_used_mb": {
-            "min": 18439.0,
-            "max": 18439.0,
-            "avg": 18439.0
-          },
-          "total_power_w": {
-            "min": 85.07,
-            "max": 85.35,
-            "avg": 85.21
-          }
-        }
-      }
-    },
-    {
-      "model": "qwen3.6:35b",
-      "slug": "qwen3_6_35b",
-      "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b",
-      "title": "",
-      "elapsed_seconds": 4.9,
-      "status": "failed",
-      "validation_score": 0.0,
-      "validation_complete": false,
-      "statistics_run_count": 0,
-      "findings_count": 0,
-      "chart_count": 0,
-      "validation": {
-        "complete": false,
-        "score": 0.0,
-        "passed_checks": 0,
-        "total_checks": 5,
-        "checks": [
-          {
-            "name": "profile_exists",
-            "passed": false,
-            "detail": "profile.json 존재",
-            "required": true
-          },
-          {
-            "name": "descriptive_stats",
-            "passed": false,
-            "detail": "run_descriptive_stats 실행 필요",
-            "required": true
-          },
-          {
-            "name": "charts",
-            "passed": false,
-            "detail": "차트 없음 (현재 0개)",
-            "required": true
-          },
-          {
-            "name": "report_exists",
-            "passed": false,
-            "detail": "report.md 없음",
-            "required": true
-          },
-          {
-            "name": "findings_count",
-            "passed": false,
-            "detail": "주요 발견 3개 이상 필요 (현재 0개)",
-            "required": true
-          }
-        ],
-        "missing_analyses": [
-          "descriptive_stats"
-        ],
-        "issues": [
-          "profile.json 존재",
-          "run_descriptive_stats 실행 필요",
-          "차트 없음 (현재 0개)",
-          "report.md 없음",
-          "주요 발견 3개 이상 필요 (현재 0개)"
-        ],
-        "recommendations": [
-          "profile_exists: profile.json 존재",
-          "descriptive_stats: run_descriptive_stats 실행 필요",
-          "charts: 차트 없음 (현재 0개)",
-          "report_exists: report.md 없음",
-          "findings_count: 주요 발견 3개 이상 필요 (현재 0개)",
-          "run_descriptive_stats를 먼저 실행하세요.",
-          "generate_charts로 시각화를 저장하세요.",
-          "save_analysis_report의 findings를 Tool 결과 기반으로 3개 이상 작성하세요."
-        ],
-        "metrics": {
-          "statistics_run_count": 0,
-          "chart_count": 0,
-          "findings_count": 0,
-          "run_names": []
-        }
-      },
-      "finished_at": "2026-06-18T18:46:20.605027",
-      "gpu_stats": {
-        "model": "qwen3.6:35b",
-        "started_at": "2026-06-18 18:46:15",
-        "finished_at": "2026-06-18 18:46:20",
+        "started_at": "2026-06-18 18:47:14",
+        "finished_at": "2026-06-18 18:47:18",
         "interval_sec": 5.0,
         "sample_count": 1,
         "gpu_count": 4,
@@ -573,9 +348,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 18.09,
-                "max": 18.09,
-                "avg": 18.09
+                "min": 18.27,
+                "max": 18.27,
+                "avg": 18.27
               }
             }
           },
@@ -603,9 +378,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 21.31,
-                "max": 21.31,
-                "avg": 21.31
+                "min": 22.19,
+                "max": 22.19,
+                "avg": 22.19
               }
             }
           },
@@ -633,9 +408,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 16.92,
-                "max": 16.92,
-                "avg": 16.92
+                "min": 16.78,
+                "max": 16.78,
+                "avg": 16.78
               }
             }
           },
@@ -663,9 +438,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 28.55,
-                "max": 28.55,
-                "avg": 28.55
+                "min": 28.5,
+                "max": 28.5,
+                "avg": 28.5
               }
             }
           }
@@ -682,9 +457,234 @@
             "avg": 18439.0
           },
           "total_power_w": {
-            "min": 84.87,
-            "max": 84.87,
-            "avg": 84.87
+            "min": 85.74,
+            "max": 85.74,
+            "avg": 85.74
+          }
+        }
+      }
+    },
+    {
+      "model": "qwen3.6:35b",
+      "slug": "qwen3_6_35b",
+      "output_dir": "/data1/github_cschae/adk-agent-lab/03_data_statistics/output/qwen3_6_35b",
+      "title": "",
+      "elapsed_seconds": 1.3,
+      "status": "failed",
+      "validation_score": 0.0,
+      "validation_complete": false,
+      "statistics_run_count": 0,
+      "findings_count": 0,
+      "chart_count": 0,
+      "validation": {
+        "complete": false,
+        "score": 0.0,
+        "passed_checks": 0,
+        "total_checks": 5,
+        "checks": [
+          {
+            "name": "profile_exists",
+            "passed": false,
+            "detail": "profile.json 존재",
+            "required": true
+          },
+          {
+            "name": "descriptive_stats",
+            "passed": false,
+            "detail": "run_descriptive_stats 실행 필요",
+            "required": true
+          },
+          {
+            "name": "charts",
+            "passed": false,
+            "detail": "차트 없음 (현재 0개)",
+            "required": true
+          },
+          {
+            "name": "report_exists",
+            "passed": false,
+            "detail": "report.md 없음",
+            "required": true
+          },
+          {
+            "name": "findings_count",
+            "passed": false,
+            "detail": "주요 발견 3개 이상 필요 (현재 0개)",
+            "required": true
+          }
+        ],
+        "missing_analyses": [
+          "descriptive_stats"
+        ],
+        "issues": [
+          "profile.json 존재",
+          "run_descriptive_stats 실행 필요",
+          "차트 없음 (현재 0개)",
+          "report.md 없음",
+          "주요 발견 3개 이상 필요 (현재 0개)"
+        ],
+        "recommendations": [
+          "profile_exists: profile.json 존재",
+          "descriptive_stats: run_descriptive_stats 실행 필요",
+          "charts: 차트 없음 (현재 0개)",
+          "report_exists: report.md 없음",
+          "findings_count: 주요 발견 3개 이상 필요 (현재 0개)",
+          "run_descriptive_stats를 먼저 실행하세요.",
+          "generate_charts로 시각화를 저장하세요.",
+          "save_analysis_report의 findings를 Tool 결과 기반으로 3개 이상 작성하세요."
+        ],
+        "metrics": {
+          "statistics_run_count": 0,
+          "chart_count": 0,
+          "findings_count": 0,
+          "run_names": []
+        }
+      },
+      "finished_at": "2026-06-18T18:47:19.648839",
+      "gpu_stats": {
+        "model": "qwen3.6:35b",
+        "started_at": "2026-06-18 18:47:18",
+        "finished_at": "2026-06-18 18:47:19",
+        "interval_sec": 5.0,
+        "sample_count": 1,
+        "gpu_count": 4,
+        "per_gpu": {
+          "0": {
+            "gpu_name": "GPU 0",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4047.0,
+                "max": 4047.0,
+                "avg": 4047.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 24.0,
+                "avg": 24.0
+              },
+              "power_w": {
+                "min": 18.14,
+                "max": 18.14,
+                "avg": 18.14
+              }
+            }
+          },
+          "1": {
+            "gpu_name": "GPU 1",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 4041.0,
+                "max": 4041.0,
+                "avg": 4041.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 24.0,
+                "avg": 24.0
+              },
+              "power_w": {
+                "min": 22.38,
+                "max": 22.38,
+                "avg": 22.38
+              }
+            }
+          },
+          "2": {
+            "gpu_name": "GPU 2",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 3557.0,
+                "max": 3557.0,
+                "avg": 3557.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 24.0,
+                "avg": 24.0
+              },
+              "power_w": {
+                "min": 17.03,
+                "max": 17.03,
+                "avg": 17.03
+              }
+            }
+          },
+          "3": {
+            "gpu_name": "GPU 3",
+            "metrics": {
+              "util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_util_pct": {
+                "min": 0.0,
+                "max": 0.0,
+                "avg": 0.0
+              },
+              "mem_used_mb": {
+                "min": 6794.0,
+                "max": 6794.0,
+                "avg": 6794.0
+              },
+              "temp_c": {
+                "min": 24.0,
+                "max": 24.0,
+                "avg": 24.0
+              },
+              "power_w": {
+                "min": 28.48,
+                "max": 28.48,
+                "avg": 28.48
+              }
+            }
+          }
+        },
+        "aggregate": {
+          "total_gpu_util_pct": {
+            "min": 0.0,
+            "max": 0.0,
+            "avg": 0.0
+          },
+          "total_mem_used_mb": {
+            "min": 18439.0,
+            "max": 18439.0,
+            "avg": 18439.0
+          },
+          "total_power_w": {
+            "min": 86.03,
+            "max": 86.03,
+            "avg": 86.03
           }
         }
       }
@@ -765,11 +765,11 @@
           "run_names": []
         }
       },
-      "finished_at": "2026-06-18T18:46:25.397074",
+      "finished_at": "2026-06-18T18:47:24.484871",
       "gpu_stats": {
         "model": "qwen3-vl:32b",
-        "started_at": "2026-06-18 18:46:20",
-        "finished_at": "2026-06-18 18:46:25",
+        "started_at": "2026-06-18 18:47:19",
+        "finished_at": "2026-06-18 18:47:24",
         "interval_sec": 5.0,
         "sample_count": 1,
         "gpu_count": 4,
@@ -798,9 +798,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 18.45,
-                "max": 18.45,
-                "avg": 18.45
+                "min": 18.16,
+                "max": 18.16,
+                "avg": 18.16
               }
             }
           },
@@ -828,9 +828,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 21.37,
-                "max": 21.37,
-                "avg": 21.37
+                "min": 22.48,
+                "max": 22.48,
+                "avg": 22.48
               }
             }
           },
@@ -858,9 +858,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 17.24,
-                "max": 17.24,
-                "avg": 17.24
+                "min": 16.96,
+                "max": 16.96,
+                "avg": 16.96
               }
             }
           },
@@ -888,9 +888,9 @@
                 "avg": 24.0
               },
               "power_w": {
-                "min": 28.56,
-                "max": 28.56,
-                "avg": 28.56
+                "min": 28.48,
+                "max": 28.48,
+                "avg": 28.48
               }
             }
           }
@@ -907,9 +907,9 @@
             "avg": 18439.0
           },
           "total_power_w": {
-            "min": 85.62,
-            "max": 85.62,
-            "avg": 85.62
+            "min": 86.08,
+            "max": 86.08,
+            "avg": 86.08
           }
         }
       }

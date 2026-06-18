@@ -1,8 +1,8 @@
 {
   "model": "gemma4:26b",
-  "elapsed_seconds": 5.7,
+  "elapsed_seconds": 4.1,
   "status": "failed",
   "validation_score": 0.0,
   "validation_complete": false,
-  "finished_at": "2026-06-18T18:46:15.747171"
+  "finished_at": "2026-06-18T18:47:18.310446"
 }
