@@ -62,10 +62,31 @@ save_validation = validator_mod.save_validation
 reinforcement_prompt = validator_mod.reinforcement_prompt
 generate_output_readme = compare_report_mod.generate_output_readme
 sync_output_root = report_tools.sync_output_root
+finalize_model_output = report_tools.finalize_model_output
 log_event = session_log.log_event
 log_session_start = session_log.log_session_start
 log_session_end = session_log.log_session_end
 AUTO_SYNC_RESULTS = config.AUTO_SYNC_RESULTS
+
+
+def _check_dependencies() -> None:
+    missing: list[str] = []
+    try:
+        import pandas  # noqa: F401
+    except ImportError:
+        missing.append("pandas")
+    try:
+        import matplotlib  # noqa: F401
+    except ImportError:
+        missing.append("matplotlib")
+    if missing:
+        print(
+            "필수 패키지가 없습니다: " + ", ".join(missing) + "\n"
+            "  pip install -r ../../requirements.txt",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
 
 AUTO_PROMPT = f"""
 `{DEFAULT_DATA_PATH.name}` 데이터를 로드해 통계 분석을 수행하세요.
@@ -117,7 +138,8 @@ def _prompt_for_round(model: str, round_num: int) -> str:
         return ""
     if round_num == 1:
         return AUTO_PROMPT
-    return reinforcement_prompt(progress["validation"])
+    prompt = reinforcement_prompt(progress["validation"])
+    return prompt + "\n\n**먼저 load_data를 호출한 뒤** 보강 Tool을 실행하세요."
 
 
 def _run_adk_until_complete(model: str) -> None:
@@ -148,22 +170,22 @@ def _run_adk_until_complete(model: str) -> None:
 
 
 def _resolve_status(model: str, subprocess_failed: bool) -> str:
-    if subprocess_failed:
-        return "failed"
     progress = _analysis_progress(model)
     if progress["complete"]:
         return "ok"
-    out_dir = output_dir_for_model(model)
-    if out_dir.joinpath("profile.json").exists() or out_dir.joinpath("report.md").exists():
+    if subprocess_failed and not (output_dir_for_model(model) / "statistics.json").exists():
+        return "failed"
+    if progress["validation"].get("metrics", {}).get("statistics_run_count", 0) > 0:
         return "partial"
-    return "failed"
+    return "failed" if subprocess_failed else "partial"
 
 
 def _annotate_model_result(model: str, elapsed: float, status: str) -> dict:
     out_dir = output_dir_for_model(model)
     out_dir.mkdir(parents=True, exist_ok=True)
-    validation = validate_analysis_output(out_dir)
-    save_validation(out_dir, validation)
+
+    finalized = finalize_model_output(out_dir, model=model)
+    validation = finalized.get("validation", validate_analysis_output(out_dir))
     metrics = validation.get("metrics", {})
 
     meta_path = out_dir / "analysis_metadata.json"
@@ -395,21 +417,36 @@ def main() -> None:
         return
 
     if arg == "report":
+        for model in COMPARE_MODELS:
+            out_dir = output_dir_for_model(model)
+            if out_dir.exists():
+                finalize_model_output(out_dir, model=model)
         _write_output_readme(_load_results_for_report())
         print(f"Generated {OUTPUT_README_PATH}")
         return
 
+    if arg == "finalize":
+        for model in COMPARE_MODELS:
+            out_dir = output_dir_for_model(model)
+            if out_dir.exists():
+                result = finalize_model_output(out_dir, model=model)
+                print(f"{model}: score={result['validation']['score']}% -> {result['readme_path']}")
+        return
+
     if arg in ("compare", "auto", ""):
+        _check_dependencies()
         _run_compare_all()
         return
 
     if arg == "single":
+        _check_dependencies()
         model = os.getenv("OLLAMA_MODEL", COMPARE_MODELS[0])
         result = _run_single_model(model)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
 
     if arg == "chat":
+        _check_dependencies()
         model = os.getenv("OLLAMA_MODEL", COMPARE_MODELS[0])
         log_session_start(mode="chat", model=model)
         try:
@@ -419,6 +456,7 @@ def main() -> None:
         return
 
     if arg == "run":
+        _check_dependencies()
         model = os.getenv("OLLAMA_MODEL", COMPARE_MODELS[0])
         extra = sys.argv[2:]
         log_session_start(mode="run", model=model)
@@ -429,10 +467,11 @@ def main() -> None:
         return
 
     print(
-        "Usage: run.py [compare|single|chat|run|sync|report|tools]\n"
+        "Usage: run.py [compare|single|chat|run|sync|report|finalize|tools]\n"
         "  compare (default) — 4개 모델 순차 통계 분석\n"
         "  single            — OLLAMA_MODEL 1개만\n"
-        "  report            — comparison_summary로 README 재생성",
+        "  report            — 모델별 README 정리 + comparison README 재생성\n"
+        "  finalize          — 모델별 README·누락 산출물 보완만",
         file=sys.stderr,
     )
     sys.exit(1)

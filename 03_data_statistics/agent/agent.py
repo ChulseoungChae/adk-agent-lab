@@ -7,6 +7,7 @@ from .config import DEFAULT_DATA_PATH, OLLAMA_MODEL
 from .data_tools import load_data, profile_data, sample_rows
 from .report_tools import (
     detect_outliers,
+    finalize_output,
     generate_charts,
     read_analysis_state,
     run_categorical_summary,
@@ -38,7 +39,9 @@ INSTRUCTION = f"""
 6. save_analysis_report — Tool 결과만 인용한 한국어 리포트 저장
 7. validate_analysis — 결과 검증 (누락·이슈 확인)
 8. validate_analysis에서 complete=false이면 recommendations에 따라 **보강** 후 5~7 반복
-9. read_analysis_state — 최종 확인
+   - **보강 라운드 시작 시 반드시 load_data를 다시 호출**하세요 (메모리가 초기화됩니다).
+9. finalize_output — README.md 정리 및 누락 report·charts 자동 보완
+10. read_analysis_state — 최종 확인
 
 ## 계획·진단 규칙
 - profile_data 실행 전에는 통계 Tool을 호출하지 마세요.
@@ -48,8 +51,9 @@ INSTRUCTION = f"""
 
 ## 보강 규칙
 - validate_analysis의 missing_analyses에 있는 Tool만 추가 실행하세요.
+- **새 ADK 라운드에서는 load_data → (필요 시 profile_data) 후 통계 Tool을 호출**하세요.
 - 이미 통과한 항목은 불필요하게 반복하지 마세요.
-- 보강 후 save_analysis_report로 리포트를 업데이트하세요.
+- 보강 후 save_analysis_report로 리포트를 업데이트하고 finalize_output을 호출하세요.
 
 ## 자율 실행
 - 사용자에게 질문하지 말고 처음부터 끝까지 완료하세요.
@@ -73,6 +77,7 @@ root_agent = Agent(
         generate_charts,
         save_analysis_report,
         validate_analysis,
+        finalize_output,
         read_analysis_state,
     ],
 )

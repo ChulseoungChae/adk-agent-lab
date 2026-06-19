@@ -58,9 +58,21 @@ pip install -r ../../requirements.txt
 python3 run.py tools        # LLM 없이 Tool+검증 테스트
 python3 run.py              # 4모델 순차 분석 (기본)
 python3 run.py single       # OLLAMA_MODEL 1개만
-python3 run.py report       # comparison_summary → output/README.md
+python3 run.py report       # 모델별 README 정리 + comparison README 재생성
+python3 run.py finalize     # README·누락 report/charts만 보완
 python3 run.py sync
 ```
+
+## 산출물
+
+| 파일 | 설명 |
+|------|------|
+| **`README.md`** | **모델별 통합 요약** (프로파일·통계표·차트·검증 — JSON을 읽기 쉽게 정리) |
+| `report.md` | LLM 서술형 리포트 (없으면 statistics.json 기반 자동 생성) |
+| `profile.json` / `statistics.json` / `validation.json` | 원본 데이터 |
+| `charts/*.png` | 히스토그램·상관 히트맵 |
+
+`finalize_output` Tool 또는 `run.py finalize`가 **JSON+차트 → README.md** 정리를 담당합니다.
 
 ## 검증·보강 (`validate_analysis`)
 

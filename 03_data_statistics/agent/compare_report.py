@@ -104,7 +104,7 @@ def generate_output_readme(
             f"| {item.get('statistics_run_count', '-')} "
             f"| {item.get('findings_count', '-')} "
             f"| {item.get('elapsed_seconds', '-')}s "
-            f"| `{item.get('slug', '')}/` |"
+            f"| [`{item.get('slug', '')}/README.md`]({item.get('slug', '')}/README.md) |"
         )
 
     lines.extend(["", "## 비교 그래프", ""])
@@ -131,7 +131,7 @@ def generate_output_readme(
                 lines.append("- 미통과:")
                 for issue in issues:
                     lines.append(f"  - {issue}")
-        lines.append(f"- 리포트: `{slug}/report.md`")
+        lines.append(f"- 리포트: [`{slug}/README.md`]({slug}/README.md) · [`report.md`]({slug}/report.md)")
         lines.append("")
 
     lines.extend(

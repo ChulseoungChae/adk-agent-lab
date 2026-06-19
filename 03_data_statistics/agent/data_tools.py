@@ -17,9 +17,70 @@ _df: pd.DataFrame | None = None
 _data_path: Path | None = None
 
 
+def _load_frame_from_path(resolved: Path) -> pd.DataFrame:
+    suffix = resolved.suffix.lower()
+    if suffix == ".csv":
+        frame = pd.read_csv(resolved)
+    elif suffix in (".json", ".jsonl"):
+        frame = pd.read_json(resolved)
+    else:
+        raise ValueError(f"지원하지 않는 형식: {suffix} (csv, json만 지원)")
+
+    for col in frame.columns:
+        if "time" in str(col).lower() or "date" in str(col).lower():
+            try:
+                frame[col] = pd.to_datetime(frame[col])
+            except (ValueError, TypeError):
+                pass
+    return frame
+
+
+def reload_data_if_needed() -> bool:
+    """ADK 새 라운드에서 메모리가 비었을 때 profile/default 경로로 자동 재로드."""
+    global _df, _data_path
+    if _df is not None:
+        return True
+
+    resolved = DEFAULT_DATA_PATH.resolve()
+    if PROFILE_PATH.exists():
+        profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
+        raw = profile.get("data_path")
+        if raw:
+            candidate = Path(str(raw)).expanduser()
+            if candidate.exists():
+                resolved = candidate.resolve()
+
+    if not resolved.exists():
+        return False
+
+    _df = _load_frame_from_path(resolved)
+    _data_path = resolved
+    return True
+
+
+def reload_data_for_output(output_dir: Path) -> bool:
+    """지정 output 폴더의 profile.json 기준으로 데이터를 재로드합니다."""
+    global _df, _data_path
+    resolved = DEFAULT_DATA_PATH.resolve()
+    profile_path = output_dir / "profile.json"
+    if profile_path.exists():
+        profile = json.loads(profile_path.read_text(encoding="utf-8"))
+        raw = profile.get("data_path")
+        if raw:
+            candidate = Path(str(raw)).expanduser()
+            if candidate.exists():
+                resolved = candidate.resolve()
+    if not resolved.exists():
+        return False
+    _df = _load_frame_from_path(resolved)
+    _data_path = resolved
+    return True
+
+
 def _require_dataframe() -> pd.DataFrame:
-    if _df is None:
+    if not reload_data_if_needed():
         raise RuntimeError("데이터가 로드되지 않았습니다. 먼저 load_data를 호출하세요.")
+    assert _df is not None
     return _df
 
 
@@ -57,21 +118,7 @@ def load_data(path: str = "") -> dict[str, Any]:
     if not resolved.exists():
         raise FileNotFoundError(f"데이터 파일 없음: {resolved}")
 
-    suffix = resolved.suffix.lower()
-    if suffix == ".csv":
-        frame = pd.read_csv(resolved)
-    elif suffix in (".json", ".jsonl"):
-        frame = pd.read_json(resolved)
-    else:
-        raise ValueError(f"지원하지 않는 형식: {suffix} (csv, json만 지원)")
-
-    # datetime 후보 컬럼 자동 변환
-    for col in frame.columns:
-        if "time" in str(col).lower() or "date" in str(col).lower():
-            try:
-                frame[col] = pd.to_datetime(frame[col])
-            except (ValueError, TypeError):
-                pass
+    frame = _load_frame_from_path(resolved)
 
     _df = frame
     _data_path = resolved

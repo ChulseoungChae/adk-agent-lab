@@ -9,10 +9,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import pandas as pd
 
 from .config import (
@@ -28,10 +24,11 @@ from .config import (
     STATISTICS_PATH,
     VALIDATION_PATH,
 )
-from .data_tools import get_loaded_dataframe
+from .data_tools import get_loaded_dataframe, reload_data_for_output, reload_data_if_needed
 from .session_log import log_event, log_tool
 from . import stats_engine
 from .analysis_validator import save_validation, validate_analysis_output
+from .model_readme import build_report_from_artifacts, generate_model_readme
 
 _statistics_runs: list[dict[str, Any]] = []
 
@@ -70,9 +67,69 @@ def _append_run(name: str, result: dict[str, Any]) -> dict[str, Any]:
 
 def _require_frame() -> pd.DataFrame:
     frame = get_loaded_dataframe()
+    if frame is None and reload_data_if_needed():
+        frame = get_loaded_dataframe()
     if frame is None:
         raise RuntimeError("데이터가 로드되지 않았습니다. 먼저 load_data를 호출하세요.")
     return frame
+
+
+def _render_charts(
+    frame: pd.DataFrame,
+    charts_dir: Path,
+    *,
+    histogram_columns: list[str] | None = None,
+) -> list[str]:
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError as exc:
+        raise RuntimeError(
+            "matplotlib이 필요합니다. pip install -r requirements.txt 를 실행하세요."
+        ) from exc
+
+    charts_dir.mkdir(parents=True, exist_ok=True)
+    chart_paths: list[str] = []
+    numeric = list(frame.select_dtypes(include="number").columns)
+    hist_cols = (
+        [c for c in (histogram_columns or []) if c in numeric][:4]
+        if histogram_columns
+        else numeric[:3]
+    )
+
+    for col in hist_cols:
+        fig, ax = plt.subplots(figsize=(7, 4))
+        series = frame[col].dropna()
+        ax.hist(series, bins=min(30, max(10, series.nunique())), color="#4C78A8", edgecolor="white")
+        ax.set_title(f"Histogram: {col}")
+        ax.set_xlabel(col)
+        ax.set_ylabel("Count")
+        fig.tight_layout()
+        safe_name = str(col).replace("/", "_").replace(" ", "_")
+        out = charts_dir / f"hist_{safe_name}.png"
+        fig.savefig(out, bbox_inches="tight")
+        plt.close(fig)
+        chart_paths.append(str(out.name))
+
+    if len(numeric) >= 2:
+        corr = frame[numeric].corr(numeric_only=True)
+        fig, ax = plt.subplots(figsize=(8, 6))
+        im = ax.imshow(corr.values, cmap="RdBu_r", vmin=-1, vmax=1)
+        ax.set_xticks(range(len(corr.columns)))
+        ax.set_yticks(range(len(corr.columns)))
+        ax.set_xticklabels(corr.columns, rotation=45, ha="right", fontsize=8)
+        ax.set_yticklabels(corr.columns, fontsize=8)
+        ax.set_title("Correlation Heatmap")
+        fig.colorbar(im, ax=ax, fraction=0.046)
+        fig.tight_layout()
+        heatmap_path = charts_dir / "correlation_heatmap.png"
+        fig.savefig(heatmap_path, bbox_inches="tight")
+        plt.close(fig)
+        chart_paths.append(heatmap_path.name)
+
+    return chart_paths
 
 
 def _current_branch() -> str:
@@ -252,45 +309,71 @@ def generate_charts(histogram_columns: list[str] | None = None) -> dict[str, Any
     """
     frame = _require_frame()
     CHARTS_DIR.mkdir(parents=True, exist_ok=True)
-    chart_paths: list[str] = []
-
-    numeric = list(frame.select_dtypes(include="number").columns)
-    if histogram_columns:
-        hist_cols = [c for c in histogram_columns if c in numeric][:4]
-    else:
-        hist_cols = numeric[:3]
-
-    for col in hist_cols:
-        fig, ax = plt.subplots(figsize=(7, 4))
-        series = frame[col].dropna()
-        ax.hist(series, bins=min(30, max(10, series.nunique())), color="#4C78A8", edgecolor="white")
-        ax.set_title(f"Histogram: {col}")
-        ax.set_xlabel(col)
-        ax.set_ylabel("Count")
-        fig.tight_layout()
-        safe_name = str(col).replace("/", "_").replace(" ", "_")
-        out = CHARTS_DIR / f"hist_{safe_name}.png"
-        fig.savefig(out, bbox_inches="tight")
-        plt.close(fig)
-        chart_paths.append(str(out.relative_to(REPORT_PATH.parent)))
-
-    if len(numeric) >= 2:
-        corr = frame[numeric].corr(numeric_only=True)
-        fig, ax = plt.subplots(figsize=(8, 6))
-        im = ax.imshow(corr.values, cmap="RdBu_r", vmin=-1, vmax=1)
-        ax.set_xticks(range(len(corr.columns)))
-        ax.set_yticks(range(len(corr.columns)))
-        ax.set_xticklabels(corr.columns, rotation=45, ha="right", fontsize=8)
-        ax.set_yticklabels(corr.columns, fontsize=8)
-        ax.set_title("Correlation Heatmap")
-        fig.colorbar(im, ax=ax, fraction=0.046)
-        fig.tight_layout()
-        heatmap_path = CHARTS_DIR / "correlation_heatmap.png"
-        fig.savefig(heatmap_path, bbox_inches="tight")
-        plt.close(fig)
-        chart_paths.append(str(heatmap_path.relative_to(REPORT_PATH.parent)))
-
+    names = _render_charts(frame, CHARTS_DIR, histogram_columns=histogram_columns)
+    chart_paths = [f"charts/{name}" for name in names]
     return {"status": "ok", "charts": chart_paths}
+
+
+def generate_charts_to_dir(
+    output_dir: Path,
+    histogram_columns: list[str] | None = None,
+) -> list[str]:
+    """지정 output 폴더에 차트를 저장합니다 (run.py 보강용)."""
+    if not reload_data_for_output(output_dir):
+        return []
+    frame = get_loaded_dataframe()
+    if frame is None:
+        return []
+    charts_dir = output_dir / "charts"
+    names = _render_charts(frame, charts_dir, histogram_columns=histogram_columns)
+    return [f"charts/{name}" for name in names]
+
+
+def finalize_model_output(output_dir: Path, *, model: str = "") -> dict[str, Any]:
+    """LLM 실패·부분 완료 시 JSON·차트로 report.md·README.md를 자동 정리합니다."""
+    stats_path = output_dir / "statistics.json"
+    report_path = output_dir / "report.md"
+    charts_dir = output_dir / "charts"
+
+    actions: list[str] = []
+
+    if stats_path.exists() and not list(charts_dir.glob("*.png")):
+        charts = generate_charts_to_dir(output_dir)
+        if charts:
+            actions.append(f"charts_generated:{len(charts)}")
+
+    if stats_path.exists() and not report_path.exists():
+        built = build_report_from_artifacts(output_dir)
+        if built:
+            actions.append("report_built")
+
+    validation = validate_analysis_output(output_dir)
+    save_validation(output_dir, validation)
+    readme_path = output_dir / "README.md"
+    generate_model_readme(output_dir, model=model)
+    actions.append("readme_generated")
+
+    return {
+        "status": "finalized",
+        "output_dir": str(output_dir),
+        "readme_path": str(readme_path),
+        "actions": actions,
+        "validation": validation,
+    }
+
+
+@log_tool("finalize_output")
+def finalize_output() -> dict[str, Any]:
+    """현재 output 폴더의 JSON·차트를 README.md로 정리하고 누락 산출물을 보완합니다.
+
+    statistics.json은 있으나 report.md·charts·README.md가 없을 때 자동 생성합니다.
+
+    Returns:
+        정리 결과와 최신 validation.
+    """
+    from .config import OLLAMA_MODEL
+
+    return finalize_model_output(REPORT_PATH.parent, model=OLLAMA_MODEL)
 
 
 @log_tool("validate_analysis")
@@ -306,6 +389,7 @@ def validate_analysis() -> dict[str, Any]:
     output_dir = REPORT_PATH.parent
     validation = validate_analysis_output(output_dir)
     save_validation(output_dir, validation)
+    generate_model_readme(output_dir)
     return {
         "status": "validated",
         "path": str(VALIDATION_PATH),
@@ -365,6 +449,7 @@ def save_analysis_report(
         lines.append("")
 
     REPORT_PATH.write_text("\n".join(lines), encoding="utf-8")
+    generate_model_readme(REPORT_PATH.parent)
 
     result: dict[str, Any] = {
         "status": "saved",
