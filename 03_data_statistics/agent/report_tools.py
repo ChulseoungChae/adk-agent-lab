@@ -24,7 +24,12 @@ from .config import (
     STATISTICS_PATH,
     VALIDATION_PATH,
 )
-from .data_tools import get_loaded_dataframe, reload_data_for_output, reload_data_if_needed
+from .data_tools import (
+    get_loaded_dataframe,
+    refresh_profile_for_output,
+    reload_data_for_output,
+    reload_data_if_needed,
+)
 from .session_log import log_event, log_tool
 from . import stats_engine
 from .analysis_validator import save_validation, validate_analysis_output
@@ -112,6 +117,35 @@ def _render_charts(
         fig.savefig(out, bbox_inches="tight")
         plt.close(fig)
         chart_paths.append(str(out.name))
+
+    box_cols = numeric[:8]
+    for col in box_cols:
+        fig, ax = plt.subplots(figsize=(6, 4))
+        series = frame[col].dropna()
+        ax.boxplot(series, vert=True, patch_artist=True)
+        ax.set_title(f"Boxplot: {col}")
+        ax.set_ylabel(col)
+        ax.grid(axis="y", alpha=0.3)
+        fig.tight_layout()
+        safe_name = str(col).replace("/", "_").replace(" ", "_")
+        out = charts_dir / f"box_{safe_name}.png"
+        fig.savefig(out, bbox_inches="tight")
+        plt.close(fig)
+        chart_paths.append(str(out.name))
+
+    if len(box_cols) >= 2:
+        fig, ax = plt.subplots(figsize=(max(8, len(box_cols) * 1.2), 5))
+        data = [frame[col].dropna().values for col in box_cols]
+        ax.boxplot(data, labels=box_cols, patch_artist=True)
+        ax.set_title("Boxplot: Numeric Columns")
+        ax.set_ylabel("Value")
+        ax.tick_params(axis="x", rotation=30)
+        ax.grid(axis="y", alpha=0.3)
+        fig.tight_layout()
+        combined_path = charts_dir / "boxplot_all_numeric.png"
+        fig.savefig(combined_path, bbox_inches="tight")
+        plt.close(fig)
+        chart_paths.append(combined_path.name)
 
     if len(numeric) >= 2:
         corr = frame[numeric].corr(numeric_only=True)
@@ -337,7 +371,10 @@ def finalize_model_output(output_dir: Path, *, model: str = "") -> dict[str, Any
 
     actions: list[str] = []
 
-    if stats_path.exists() and not list(charts_dir.glob("*.png")):
+    if refresh_profile_for_output(output_dir):
+        actions.append("profile_refreshed")
+
+    if stats_path.exists():
         charts = generate_charts_to_dir(output_dir)
         if charts:
             actions.append(f"charts_generated:{len(charts)}")

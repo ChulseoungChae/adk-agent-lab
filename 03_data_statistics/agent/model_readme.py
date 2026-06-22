@@ -46,6 +46,15 @@ def _build_findings_from_stats(
         ]
         if high_missing:
             findings.append(f"결측 10% 초과 컬럼: {', '.join(high_missing)}")
+        if profile.get("data_period"):
+            period = profile["data_period"]
+            findings.append(
+                f"데이터 주기({period.get('column', '')}): "
+                f"{period.get('inferred_frequency', '-')}"
+            )
+        file_info = profile.get("file_info", {})
+        if file_info.get("size_human"):
+            findings.append(f"파일 크기: {file_info['size_human']}")
 
     corr = _find_run(runs, "correlation")
     if corr and corr.get("matrix"):
@@ -160,6 +169,7 @@ def generate_model_readme(output_dir: Path, *, model: str = "") -> str:
     ]
 
     if profile:
+        file_info = profile.get("file_info", {})
         lines.extend(
             [
                 "",
@@ -167,10 +177,54 @@ def generate_model_readme(output_dir: Path, *, model: str = "") -> str:
                 "",
                 f"- 행 수: **{profile.get('row_count', '?')}**",
                 f"- 열 수: **{profile.get('column_count', '?')}**",
+            ]
+        )
+        if file_info:
+            lines.append(
+                f"- 파일 크기: **{file_info.get('size_human', '-')}** "
+                f"(`{file_info.get('name', '-')}`)"
+            )
+        data_period = profile.get("data_period")
+        if data_period:
+            lines.append(
+                f"- 데이터 주기 (`{data_period.get('column', '')}`): "
+                f"**{data_period.get('inferred_frequency', '-')}** "
+                f"(중앙 간격 {data_period.get('median_interval_human', '-')})"
+            )
+        elif profile.get("datetime_intervals"):
+            for col, interval in profile["datetime_intervals"].items():
+                lines.append(
+                    f"- 데이터 주기 (`{col}`): **{interval.get('inferred_frequency', '-')}**"
+                )
+        lines.extend(
+            [
                 f"- 수치형: {', '.join(profile.get('numeric_columns', [])) or '없음'}",
                 f"- 범주형: {', '.join(profile.get('categorical_columns', [])) or '없음'}",
                 f"- 분석 힌트: {', '.join(profile.get('analysis_hints', [])) or '없음'}",
-                "",
+            ]
+        )
+
+        cat_breakdown = profile.get("categorical_breakdown", {})
+        if cat_breakdown:
+            lines.extend(["", "### 문자열·범주형 필드 분석", ""])
+            for col_name, info in cat_breakdown.items():
+                lines.append(f"#### `{col_name}`")
+                lines.append("")
+                lines.append(
+                    f"- 고유값: {info.get('unique_count', 0)}개 "
+                    f"(카테고리 {info.get('category_count', 0)}종)"
+                )
+                dist = info.get("value_distribution") or info.get("top_values") or {}
+                if dist:
+                    lines.append("")
+                    lines.append("| 값 | 건수 |")
+                    lines.append("|-----|------|")
+                    for value, count in dist.items():
+                        lines.append(f"| `{value}` | {count} |")
+                lines.append("")
+
+        lines.extend(
+            [
                 "### 컬럼 프로파일",
                 "",
                 "| 컬럼 | 종류 | 결측률(%) |",
@@ -251,10 +305,18 @@ def generate_model_readme(output_dir: Path, *, model: str = "") -> str:
         )
 
     if charts:
-        lines.extend(["", "## 시각화", ""])
-        for chart in charts:
-            rel = chart.relative_to(output_dir)
-            lines.extend([f"### {chart.stem}", "", f"![{chart.stem}]({rel})", ""])
+        box_charts = [c for c in charts if c.name.startswith("box")]
+        other_charts = [c for c in charts if not c.name.startswith("box")]
+        if box_charts:
+            lines.extend(["", "## 박스플롯 (값 범위)", ""])
+            for chart in box_charts:
+                rel = chart.relative_to(output_dir)
+                lines.extend([f"### {chart.stem}", "", f"![{chart.stem}]({rel})", ""])
+        if other_charts:
+            lines.extend(["", "## 시각화", ""])
+            for chart in other_charts:
+                rel = chart.relative_to(output_dir)
+                lines.extend([f"### {chart.stem}", "", f"![{chart.stem}]({rel})", ""])
 
     if validation:
         lines.extend(["", "## 검증 결과", ""])

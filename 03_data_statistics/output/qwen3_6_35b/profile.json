@@ -10,7 +10,17 @@
       "unique_count": 200,
       "kind": "datetime",
       "min": "2026-06-01T08:00:00",
-      "max": "2026-06-02T00:35:00"
+      "max": "2026-06-02T00:35:00",
+      "interval": {
+        "sample_count": 199,
+        "median_interval_sec": 300.0,
+        "median_interval_human": "5.0분",
+        "mean_interval_sec": 300.0,
+        "mean_interval_human": "5.0분",
+        "min_interval_sec": 300.0,
+        "max_interval_sec": 300.0,
+        "inferred_frequency": "5.0분"
+      }
     },
     {
       "name": "equipment_id",
@@ -22,7 +32,12 @@
       "top_values": {
         "EQP-A01": 100,
         "EQP-A02": 100
-      }
+      },
+      "value_distribution": {
+        "EQP-A01": 100,
+        "EQP-A02": 100
+      },
+      "category_count": 2
     },
     {
       "name": "recipe",
@@ -35,7 +50,13 @@
         "ALD_SiO2_001": 67,
         "ALD_SiO2_002": 67,
         "PVD_TiN_010": 66
-      }
+      },
+      "value_distribution": {
+        "ALD_SiO2_001": 67,
+        "ALD_SiO2_002": 67,
+        "PVD_TiN_010": 66
+      },
+      "category_count": 3
     },
     {
       "name": "chamber_pressure",
@@ -128,6 +149,63 @@
     "correlation_analysis_available",
     "groupby_analysis_available"
   ],
+  "file_info": {
+    "path": "/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv",
+    "name": "sample_sensor.csv",
+    "size_bytes": 12729,
+    "size_human": "12.4 KB"
+  },
+  "datetime_intervals": {
+    "timestamp": {
+      "sample_count": 199,
+      "median_interval_sec": 300.0,
+      "median_interval_human": "5.0분",
+      "mean_interval_sec": 300.0,
+      "mean_interval_human": "5.0분",
+      "min_interval_sec": 300.0,
+      "max_interval_sec": 300.0,
+      "inferred_frequency": "5.0분"
+    }
+  },
+  "data_period": {
+    "column": "timestamp",
+    "sample_count": 199,
+    "median_interval_sec": 300.0,
+    "median_interval_human": "5.0분",
+    "mean_interval_sec": 300.0,
+    "mean_interval_human": "5.0분",
+    "min_interval_sec": 300.0,
+    "max_interval_sec": 300.0,
+    "inferred_frequency": "5.0분"
+  },
+  "categorical_breakdown": {
+    "equipment_id": {
+      "unique_count": 2,
+      "category_count": 2,
+      "top_values": {
+        "EQP-A01": 100,
+        "EQP-A02": 100
+      },
+      "value_distribution": {
+        "EQP-A01": 100,
+        "EQP-A02": 100
+      }
+    },
+    "recipe": {
+      "unique_count": 3,
+      "category_count": 3,
+      "top_values": {
+        "ALD_SiO2_001": 67,
+        "ALD_SiO2_002": 67,
+        "PVD_TiN_010": 66
+      },
+      "value_distribution": {
+        "ALD_SiO2_001": 67,
+        "ALD_SiO2_002": 67,
+        "PVD_TiN_010": 66
+      }
+    }
+  },
   "data_path": "/data1/github_cschae/adk-agent-lab/03_data_statistics/data/sample_sensor.csv",
-  "profiled_at": "2026-06-18T19:00:38.465494"
+  "profiled_at": "2026-06-22T21:03:22.163131"
 }

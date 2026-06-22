@@ -43,7 +43,7 @@
     {
       "name": "charts",
       "passed": true,
-      "detail": "차트 없음 (현재 4개)",
+      "detail": "차트 없음 (현재 9개)",
       "required": true
     },
     {
@@ -64,7 +64,7 @@
   "recommendations": [],
   "metrics": {
     "statistics_run_count": 5,
-    "chart_count": 4,
+    "chart_count": 9,
     "findings_count": 4,
     "run_names": [
       "categorical_summary",

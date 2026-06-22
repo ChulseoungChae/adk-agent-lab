@@ -1,6 +1,6 @@
 # gemma4:26b — 통계 분석 결과
 
-자동 생성: 2026-06-19 15:36:27
+자동 생성: 2026-06-22 21:03:22
 
 ## 실행 요약
 
@@ -10,15 +10,38 @@
 | 검증 점수 | 100.0% |
 | 검증 완료 | 예 |
 | 통계 Tool 실행 | 5회 |
-| 차트 | 4개 |
+| 차트 | 9개 |
 
 ## 데이터 개요
 
 - 행 수: **200**
 - 열 수: **7**
+- 파일 크기: **12.4 KB** (`sample_sensor.csv`)
+- 데이터 주기 (`timestamp`): **5.0분** (중앙 간격 5.0분)
 - 수치형: chamber_pressure, mfc_flow, temperature, is_anomaly
 - 범주형: equipment_id, recipe
 - 분석 힌트: datetime_column_detected, correlation_analysis_available, groupby_analysis_available
+
+### 문자열·범주형 필드 분석
+
+#### `equipment_id`
+
+- 고유값: 2개 (카테고리 2종)
+
+| 값 | 건수 |
+|-----|------|
+| `EQP-A01` | 100 |
+| `EQP-A02` | 100 |
+
+#### `recipe`
+
+- 고유값: 3개 (카테고리 3종)
+
+| 값 | 건수 |
+|-----|------|
+| `ALD_SiO2_001` | 67 |
+| `ALD_SiO2_002` | 67 |
+| `PVD_TiN_010` | 66 |
 
 ### 컬럼 프로파일
 
@@ -97,6 +120,29 @@
 - 컬럼: `chamber_pressure`
 - 이상치: 0건 (0.0%)
 - 경계: -0.0122 ~ 6.5578
+
+
+## 박스플롯 (값 범위)
+
+### box_chamber_pressure
+
+![box_chamber_pressure](charts/box_chamber_pressure.png)
+
+### box_is_anomaly
+
+![box_is_anomaly](charts/box_is_anomaly.png)
+
+### box_mfc_flow
+
+![box_mfc_flow](charts/box_mfc_flow.png)
+
+### box_temperature
+
+![box_temperature](charts/box_temperature.png)
+
+### boxplot_all_numeric
+
+![boxplot_all_numeric](charts/boxplot_all_numeric.png)
 
 
 ## 시각화

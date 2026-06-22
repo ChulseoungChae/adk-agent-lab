@@ -132,6 +132,24 @@ def load_data(path: str = "") -> dict[str, Any]:
     }
 
 
+def refresh_profile_for_output(output_dir: Path) -> dict[str, Any] | None:
+    """output 폴더용 profile.json을 데이터 파일 기준으로 갱신합니다."""
+    if not reload_data_for_output(output_dir):
+        return None
+    frame = get_loaded_dataframe()
+    path = get_data_path()
+    if frame is None:
+        return None
+    profile = stats_engine.profile_dataframe(frame, data_path=path)
+    profile["data_path"] = str(path) if path else None
+    profile["profiled_at"] = datetime.now().isoformat()
+    profile_path = output_dir / "profile.json"
+    profile_path.write_text(
+        json.dumps(profile, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return profile
+
+
 @log_tool("sample_rows")
 def sample_rows(n: int = 5) -> dict[str, Any]:
     """로드된 데이터의 앞부분 샘플 행을 반환합니다.
@@ -163,7 +181,7 @@ def profile_data() -> dict[str, Any]:
         프로파일 요약 (컬럼별 kind, 결측률, analysis_hints).
     """
     frame = _require_dataframe()
-    profile = stats_engine.profile_dataframe(frame)
+    profile = stats_engine.profile_dataframe(frame, data_path=_data_path)
     profile["data_path"] = str(_data_path) if _data_path else None
     profile["profiled_at"] = datetime.now().isoformat()
 

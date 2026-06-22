@@ -2,9 +2,56 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pandas as pd
+
+
+def _human_file_size(size_bytes: int) -> str:
+    units = ["B", "KB", "MB", "GB"]
+    size = float(size_bytes)
+    for unit in units:
+        if size < 1024 or unit == units[-1]:
+            return f"{size:.1f} {unit}" if unit != "B" else f"{int(size)} B"
+        size /= 1024
+    return f"{size_bytes} B"
+
+
+def _format_timedelta(seconds: float) -> str:
+    if seconds < 60:
+        return f"{seconds:.1f}초"
+    if seconds < 3600:
+        minutes = seconds / 60
+        return f"{minutes:.1f}분"
+    hours = seconds / 3600
+    return f"{hours:.2f}시간"
+
+
+def _analyze_datetime_interval(series: pd.Series) -> dict[str, Any] | None:
+    valid = series.dropna().sort_values()
+    if len(valid) < 2:
+        return None
+
+    deltas = valid.diff().dropna()
+    if deltas.empty:
+        return None
+
+    median_sec = float(deltas.median().total_seconds())
+    mean_sec = float(deltas.mean().total_seconds())
+    min_sec = float(deltas.min().total_seconds())
+    max_sec = float(deltas.max().total_seconds())
+
+    return {
+        "sample_count": int(len(deltas)),
+        "median_interval_sec": round(median_sec, 2),
+        "median_interval_human": _format_timedelta(median_sec),
+        "mean_interval_sec": round(mean_sec, 2),
+        "mean_interval_human": _format_timedelta(mean_sec),
+        "min_interval_sec": round(min_sec, 2),
+        "max_interval_sec": round(max_sec, 2),
+        "inferred_frequency": _format_timedelta(median_sec),
+    }
 
 
 def _json_safe(value: Any) -> Any:
@@ -24,7 +71,11 @@ def _json_safe(value: Any) -> Any:
     return value
 
 
-def profile_dataframe(df: pd.DataFrame) -> dict[str, Any]:
+def profile_dataframe(
+    df: pd.DataFrame,
+    *,
+    data_path: Path | str | None = None,
+) -> dict[str, Any]:
     row_count, col_count = df.shape
     columns: list[dict[str, Any]] = []
 
@@ -52,10 +103,16 @@ def profile_dataframe(df: pd.DataFrame) -> dict[str, Any]:
             if not valid.empty:
                 col_info["min"] = _json_safe(valid.min())
                 col_info["max"] = _json_safe(valid.max())
+            interval = _analyze_datetime_interval(series)
+            if interval:
+                col_info["interval"] = interval
         else:
             col_info["kind"] = "categorical"
-            top = series.value_counts(dropna=True).head(5)
+            counts = series.value_counts(dropna=False)
+            top = counts.head(5)
             col_info["top_values"] = _json_safe(top.to_dict())
+            col_info["value_distribution"] = _json_safe(counts.head(20).to_dict())
+            col_info["category_count"] = int(counts.shape[0])
 
         columns.append(col_info)
 
@@ -73,7 +130,7 @@ def profile_dataframe(df: pd.DataFrame) -> dict[str, Any]:
     if any(c["missing_pct"] > 10 for c in columns):
         hints.append("high_missing_values")
 
-    return {
+    profile: dict[str, Any] = {
         "row_count": row_count,
         "column_count": col_count,
         "columns": columns,
@@ -82,6 +139,44 @@ def profile_dataframe(df: pd.DataFrame) -> dict[str, Any]:
         "categorical_columns": categorical_cols,
         "analysis_hints": hints,
     }
+
+    if data_path:
+        path = Path(data_path)
+        if path.exists():
+            size_bytes = path.stat().st_size
+            profile["file_info"] = {
+                "path": str(path.resolve()),
+                "name": path.name,
+                "size_bytes": size_bytes,
+                "size_human": _human_file_size(size_bytes),
+            }
+
+    datetime_intervals: dict[str, Any] = {}
+    for col in datetime_cols:
+        interval = _analyze_datetime_interval(df[col])
+        if interval:
+            datetime_intervals[col] = interval
+    if datetime_intervals:
+        profile["datetime_intervals"] = datetime_intervals
+        primary = datetime_cols[0]
+        profile["data_period"] = {
+            "column": primary,
+            **datetime_intervals[primary],
+        }
+
+    if categorical_cols:
+        profile["categorical_breakdown"] = {
+            col["name"]: {
+                "unique_count": col.get("unique_count", 0),
+                "category_count": col.get("category_count", 0),
+                "top_values": col.get("top_values", {}),
+                "value_distribution": col.get("value_distribution", {}),
+            }
+            for col in columns
+            if col.get("kind") == "categorical"
+        }
+
+    return profile
 
 
 def descriptive_stats(df: pd.DataFrame, columns: list[str] | None = None) -> dict[str, Any]:
